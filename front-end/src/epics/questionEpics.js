@@ -39,8 +39,8 @@ export const questionListEpic = (action$ , store) => {
 }
 
 export const writeQuestionEpic = (action$, store) => {
-    return action$.
-        pipe(
+    return action$
+        .pipe(
             ofType(ActionTypes.SET_QUESTION),
             tap(action => console.log('WriteEpic action:',action)),
             pluck('payload'),
@@ -54,6 +54,15 @@ export const writeQuestionEpic = (action$, store) => {
                     concat([loadingActions.loadingEnd()])                    
                 )
             )
+        )
+}
+
+export const deleteQuestionEpic = (action$, store) => {
+    return action&
+        .pipe(
+            ofType(ActionTypes.deleteQuestion),
+            pluch('payload')
+            map(id => from(api))
         )
 }
 

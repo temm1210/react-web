@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import CommentListForm from 'components/comment/CommentListForm';
+import CommentList from 'components/comment/CommentList';
 
-class commentList extends Component {
+class CommentListContainer extends Component {
     render() {
         return (
-            <div>
-                <CommentListForm/>
-            </div>
+            <CommentList/>
         );
     }
 }
 
-export default commentList;
+export default CommentListContainer;

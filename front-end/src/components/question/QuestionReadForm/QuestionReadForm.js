@@ -5,11 +5,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import CKEditor from 'components/common/Editor';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 const styles = theme => ({
     wrap: {
@@ -47,20 +47,18 @@ const styles = theme => ({
 
   
 function QuestionWriteForm(props) {
-    const { classes, question,isLogged } = props;
-
-    console.log('question:',question)
+    const { classes, question,username,questionDelete } = props;
     return (
         <div className={classes.wrap}>
-            <Typography style={{textAlign:'center', marginTop:50}} variant="h4" id="tableTitle">
-                질문하기
+            <Typography style={{marginTop:50}} variant="h4" id="tableTitle">
+                Q&A
             </Typography>
             <div className={classes.root}>
                 <List disablePadding={true}>
                     <ListItem>
                         <ListItemText 
-                            primary={<Typography style={{ fontSize:'5' }}>{question.username} </Typography>}
-                            secondary={<Typography style={{ color: 'rgba(0,0,0,.3)', fontSize:'3' }}>{question.writeDate}</Typography>} />
+                            primary={<Typography style={{ fontSize:18 , color:'#2a6496'}}>{question.username} </Typography>}
+                            secondary={<Typography style={{ color: 'rgba(0,0,0,.3)', fontSize:12 }}>{moment(question.writeDate).format("YYYY-MM-DD HH:mm")}</Typography>} />
                         <ListItemIcon>
                                 <VisibilityIcon />
                         </ListItemIcon>
@@ -69,16 +67,15 @@ function QuestionWriteForm(props) {
                             {question.views}
                         </Typography>
                     </ListItem>
-                    <Divider />
+                    <div style={{borderBottom:"1px solid rgba(0,0,0,.2)"}}></div>
                 
                     <ListItem>
                         <div style={{padding:15}}>
-                            <Typography className={classes.title} align="right" color="default" variant="h4">
+                            <Typography className={classes.title} align="right" color="default" style={{fontSize:23}}>
                                 {question.title}
                             </Typography> 
                         </div>
                     </ListItem>
-                    <Divider />
                 
                     <CKEditor
                         data={question.content}
@@ -92,14 +89,14 @@ function QuestionWriteForm(props) {
                 </List>
             </div>
             {
-                isLogged ?
+                (username && username === question.username ) ? 
                 (
                     <div className={classes.buttonWrap}>
                         <Button variant="contained" color="primary" className={classes.button}>
                             수정
                         </Button>
 
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                        <Button onClick={questionDelete} variant="contained" color="secondary" className={classes.button}>
                             삭제
                         </Button>
                     </div>

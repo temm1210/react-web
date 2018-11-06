@@ -7,7 +7,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         console.log('test1')
-        cb(null, "../images/")
+        cb(null, "images/")
     },
     filename: function (req, file, cb) {
         console.log('file:',file)
@@ -32,7 +32,7 @@ router.post('/',upload.single('upload'), (req, res) => {
 
     res.json({
         "uploaded": true,
-        "url": `http://localhost:4000/images/${req.file.filename}`
+        "url": `http://localhost:5000/images/${req.file.filename}`
     })
 })
 

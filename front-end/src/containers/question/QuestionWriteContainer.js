@@ -17,15 +17,24 @@ const styles={
 
 class QuestionWriteContainer extends Component {
     handleSubmit = (values) => {
-        const { QuestionActions, history,currentData } = this.props;
+        const { QuestionActions,username } = this.props;
 
-        console.log('currentData:',currentData);
+        values.username = username;
+        console.log('values:',values);
+        
         if(window.confirm("등록 하시겠습니까?")){ 
-            QuestionActions.setQuestion(values);
-            history.push(`/getquestion/${currentData._id}`)
+            console.log('what is it??:',QuestionActions.setQuestion(values));
+            
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { history,currentData } = this.props;
+
+        if(prevProps.currentData !== currentData)
+            history.push(`/questionget/${currentData._id}`)
+    }
+    
     handleGoBack = () => {
         const { history } = this.props;
         if(window.confirm("정말 취소를 하시겠습니까?"))
@@ -33,12 +42,14 @@ class QuestionWriteContainer extends Component {
     }
     render() {
 
-        const { loading } = this.props;
+        const { loading,username } = this.props;
         if(loading) {
             return <CircularProgress style={styles.progress} size={50} />
         }
+
         return (
-            <QuestionWriteForm 
+            <QuestionWriteForm
+                username={username}
                 onSubmit={this.handleSubmit}
                 onGoBack={this.handleGoBack} />
         );
@@ -47,6 +58,7 @@ class QuestionWriteContainer extends Component {
 
 export default connect(
     (state) => ({
+        username    : state.auth.getIn(['login','username']),
         loading     : state.loading.get('loading'),
         currentData : state.question.get('currentData')
     }),

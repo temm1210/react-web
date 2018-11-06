@@ -53,8 +53,8 @@ function QuestionList(props) {
     <div className="questionList">
       <div className="imageContainer">
         <div className="imageWrap">
-          <img className="imageWidth" alt="question1" src={require('../../../assets/images/question2.png')}/>
-          <img className="imageWidth" alt="question2" src={require('../../../assets/images/question.png')}/>
+          {/* <img className="imageWidth" alt="question1" src={require('../../../assets/images/question2.png')}/>
+          <img className="imageWidth" alt="question2" src={require('../../../assets/images/question.png')}/> */}
         </div>
         <div className="imageCaption">
           <Typography style={{textAlign:'center'}} variant="h5" id="tableTitle">
@@ -92,9 +92,8 @@ function QuestionList(props) {
                         (function(){
                           let now = moment();
                           let dataDate = moment(question.writeDate);
-                          let diff = now.diff(dataDate, 'days')
-
-                          return diff > 1 ? moment(dataDate, "YYYY-DD-MM") : 
+                          let diff = now.diff(dataDate)
+                          return diff > 80000000 ? moment(dataDate).format("YYYY-DD-MM HH:mm") : 
                                             moment(question.writeDate).fromNow()
                         })()
                       }

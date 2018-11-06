@@ -3,4 +3,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .formStyle{
+        margin-left:20;
+        margin-right:20;
+        margin-top:70;
+        margin-bottom:70;
+        background:white;
+        padding:20;
+        box-shadow: rgba(140, 140, 140, 0.4) 0.8px 0.5px 0.6px;
+        border:1px solid rgba(140,140,140, .4);
+        max-width: 800;
+        width: 100%
+    }
+    .buttonWrapStyle {
+        text-align:center
+    }
 }

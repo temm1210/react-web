@@ -15,7 +15,7 @@ mongoose.connect("mongodb://localhost/blog",{useNewUrlParser: true}).then(() => 
 })
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-app.use('/images',express.static('../images'))
+app.use('/images',express.static('images'))
 
 app.use(express.static(path.join(__dirname, '../../front-end/build')));
 app.use('/question', questionRouter);

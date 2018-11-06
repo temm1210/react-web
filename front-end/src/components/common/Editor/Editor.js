@@ -7,21 +7,27 @@ class CKEditor extends Component {
       element.on('change:data', () => {
         if (element.differ.getChanges().length > 0 ) {
           this.props.onChange(editor.getData());
+          console.log('editor.getData():',editor.getData())
         }
       });
     }
 
+    setIdNumber = () => {
+      let { idNumber } = this.props;
+      idNumber = idNumber || 1;
+
+      return `editor${idNumber}`;
+    }
 
     componentDidMount() {
-
-      const { config, init } = this.props;
-      const textarea = document.querySelector( '#editor' )
+      const { config, init, data} = this.props;
+      const textarea = document.querySelector( `#${this.setIdNumber()}` )
 
       ClassicEditor
         .create(textarea ,init)
         .then(editor => {
           Object.assign(editor, config);
-          editor.setData(this.props.data);
+          editor.setData(data);
           this.bindChangeEvent(editor, editor.model.document);
         })
         .catch( error => {
@@ -30,8 +36,10 @@ class CKEditor extends Component {
     }
   
     render() {
+      const { data } = this.props;
+
       return (
-        <textarea id={'editor'} name={'editor'}>
+        <textarea id={`${this.setIdNumber()}`} name={`${this.setIdNumber()}`} defaultValue={data}>
         </textarea>
       )
     }

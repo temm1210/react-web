@@ -75,7 +75,7 @@ export default ({ onSubmit,errorMsg }) => {
                 validate={validate}
                 errorMsg={errorMsg}
             >
-                <Typography style={{textAlign:'center'}} variant="headline" id="tableTitle">
+                <Typography style={{textAlign:'center'}} variant="h5" id="tableTitle">
                     로그인
                 </Typography>
             </ReduxForm>

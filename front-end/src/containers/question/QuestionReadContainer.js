@@ -21,8 +21,11 @@ class QuestionRead extends Component {
         QuestionActions.getStartQuestion(questionId);
     }
     
+    handleQuestionDelete =() => {
+
+    }
     render() {
-        const { loading,currentData,isLogged } = this.props;
+        const { loading,currentData,username } = this.props;
         
         if(loading) {
             return <CircularProgress style={styles.progress} size={50} />
@@ -30,8 +33,9 @@ class QuestionRead extends Component {
 
         return (
             <div>
-                <QuestionReadForm 
-                    isLogged={isLogged}
+                <QuestionReadForm
+                    questionDelete={this.handleQuestionDelete}
+                    username={username}
                     question={currentData}/>
             </div>
         );
@@ -40,7 +44,7 @@ class QuestionRead extends Component {
 
 export default connect(
     (state) => ({
-        isLogged    : state.auth.getIn(['login','isLogged']),
+        username    : state.auth.getIn(['login','username']),
         loading     : state.loading.get('loading'),
         currentData : state.question.get('currentData')
     }),

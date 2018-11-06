@@ -12,7 +12,7 @@ import {
 
 export default ( props ) => {
     const { isLogged } = props;
-    console.log('isLogged1:',isLogged)
+
     return (
         <div>
             <Switch>
@@ -30,22 +30,29 @@ export default ( props ) => {
 }
 
 function PrivateRoute({ component: Component, isLogged, ...rest }) {
-    console.log('isLogged2:',isLogged)
-    return (
-      <Route
-        {...rest}
-        render={props =>
-            isLogged ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/login"
-                // state: { from: props.location }
-              }}
-            />
-          )
-        }
+
+  let routeElement;
+
+  if(isLogged) {
+    routeElement =
+      <Route 
+        {...rest} 
+        render= {() =>(
+          <Component />
+        )} 
       />
-    );
+  } else {
+    routeElement = window.confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?") ?
+        (
+          <Route 
+            {...rest} 
+            render= {() =>(
+              <Redirect to={{pathname: "/login"}}/>
+            )} 
+          />
+        ) :
+        null
   }
+
+  return routeElement;
+}

@@ -130,7 +130,7 @@ export default ({onSubmit, onGoBack}) => {
                 </div>
             </div>
             <div className="imageCaption">
-                <Typography style={{textAlign:'center'}} variant="headline" id="tableTitle">
+                <Typography style={{textAlign:'center'}} variant="h5" id="tableTitle">
                     회원가입
                 </Typography>
             </div>

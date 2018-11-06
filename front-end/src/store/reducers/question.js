@@ -3,17 +3,20 @@ import { List, Map} from 'immutable';
 import * as ActionTypes from 'store/actionTypes/';
 
 // 액션함수들
-// const GET_QUESTION_LIST = "question/GET_QUESTION_LIST"
-export const getQuestionList = createAction(ActionTypes.GET_QUESTION_LIST);
-export const getStartQuestion= createAction(ActionTypes.GET_START_QUESTION);
-export const getEndQuestion  = createAction(ActionTypes.GET_END_QUESTION);
-export const setQuestionList = createAction(ActionTypes.SET_QUESTION_LIST);
-export const setQuestion     = createAction(ActionTypes.SET_QUESTION);
+export const getQuestionList        = createAction(ActionTypes.GET_QUESTION_LIST);
+export const getStartQuestion       = createAction(ActionTypes.GET_START_QUESTION);
+export const getEndQuestion         = createAction(ActionTypes.GET_END_QUESTION);
+export const setQuestionList        = createAction(ActionTypes.SET_QUESTION_LIST);
+export const setQuestion            = createAction(ActionTypes.SET_QUESTION);
+export const deleteQuestion         = createAction(ActionTypes.DELTE_QUESTION);
+export const deleteQuestionSuccess  = createAction(ActionTypes.DELTE_QUESTION_SUCCESS);
+export const deleteQuestionFailure  = createAction(ActionTypes.DELTE_QUESTION_FAILURE);
 
 // 초기값
 const initialState = Map({
     data:List(),
     currentData:Map({}),
+    message:''
 });
 
 
@@ -25,11 +28,14 @@ export default handleActions({
     },
     [ActionTypes.GET_END_QUESTION]: (state, action) => {
         const question = action.payload;
+        question.content += "test";
         return state.set('currentData', question)
-    }
-    // [ActionTypes.SET_QUESTION]: (state, action) => {
-    //     const question = action.payload;
-    //     console.log('question:',question)
-    //     return state.get('data').unshift(fromJS(question))
-    // }
+    },
+    [ActionTypes.DELTE_QUESTION_SUCCESS]: (state, action) => {
+        const message = action.payload;
+
+    },
+    [ActionTypes.DELTE_QUESTION_FAILURE]: (state, action) => {
+        const message = action.payload;
+    },
 },initialState);

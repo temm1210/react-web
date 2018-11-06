@@ -5,7 +5,6 @@ import { BrowserRouter} from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { bindActionCreators } from 'redux';
-// import * as ActionTypes from 'store/actionTypes';
 import * as authActions from 'store/reducers/auth';
 
 class Root extends React.Component {

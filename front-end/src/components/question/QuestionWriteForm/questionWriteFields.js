@@ -9,6 +9,9 @@ import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ClassicEditor from 'components/common/Editor';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
 
 export const renderTextField = ({ input, style, label, meta: { touched, error }, ...custom }) => (
     <TextField
@@ -22,6 +25,18 @@ export const renderTextField = ({ input, style, label, meta: { touched, error },
         margin="normal"
         variant="outlined"
     />
+)
+
+export const renderListItem = ({ label }) => (
+    <ListItem>
+        <ListItemText
+           primary={
+                <Typography type="body2" style={{fontSize:25, color: '#2a6496' }}>
+                    { label}
+                </Typography>
+            }
+        />
+    </ListItem>
 )
 
 export const renderCheckbox = ({ input, label }) => (
@@ -63,9 +78,10 @@ export const renderSelectField = ({input,labelWidth, label,children, meta: { tou
     </FormControl>
 )
 
-export const renderEditor = ( {input} ) => {
+export const renderEditor = ( {input, meta: { touched, error }} ) => {
     return (
         <ClassicEditor
+            idNumber={1}
             data={input.value}
             onChange={data => input.onChange(data)}
             init={{
