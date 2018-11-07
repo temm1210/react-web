@@ -9,7 +9,7 @@ import './QuestionWriteForm.scss'
 export default ( {onSubmit, onGoBack, username} ) => {
 
     // 만들폼의 속성이랑 컴포넌트를 정의.
-    const formFields = [
+    let formFields = [
         {
             name        : "username",
             label       : username,
@@ -29,25 +29,20 @@ export default ( {onSubmit, onGoBack, username} ) => {
             childrens   : [
                 {
                     component   : MenuItem,
-                    value       : "Ten",
-                    elementText : "Ten"
+                    value       : "question",
+                    elementText : "Q&A"
                 },
                 {
                     component   : MenuItem,
-                    value       : "Twenty",
-                    elementText : "Twenty"
+                    value       : "post",
+                    elementText : "POST"
                 },
-                {
-                    component   : MenuItem,
-                    value       : "Thirty",
-                    elementText : "Thirty"
-                }
             ]
         },
         {
             name        : 'content',
             component   : baseFields.renderEditor,
-            label       : "Content"
+            label       : "Content",
         }
     ];
     

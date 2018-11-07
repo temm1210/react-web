@@ -10,6 +10,11 @@ import CKEditor from 'components/common/Editor';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import {getEndQuestion} from 'store/reducers/question'
+import * as baseFields from 'components/question/QuestionWriteForm/questionWriteFields';
+
 
 const styles = theme => ({
     wrap: {
@@ -45,9 +50,10 @@ const styles = theme => ({
     }
 });
 
-  
-function QuestionWriteForm(props) {
-    const { classes, question,username,questionDelete } = props;
+const QuestionWriteForm = (props) => {
+   
+    const { classes, question,username,questionDelete,setModifyMode } = props;
+    
     return (
         <div className={classes.wrap}>
             <Typography style={{marginTop:50}} variant="h4" id="tableTitle">
@@ -92,11 +98,18 @@ function QuestionWriteForm(props) {
                 (username && username === question.username ) ? 
                 (
                     <div className={classes.buttonWrap}>
-                        <Button variant="contained" color="primary" className={classes.button}>
+                        <Button
+                            // onClick={() => questionModify(question._id)}
+                            onClick={setModifyMode}
+                            variant="contained" 
+                            color="primary" 
+                            className={classes.button}>
                             수정
                         </Button>
 
-                        <Button onClick={questionDelete} variant="contained" color="secondary" className={classes.button}>
+                        <Button 
+                            onClick={() =>questionDelete(question._id)} 
+                            variant="contained" color="secondary" className={classes.button}>
                             삭제
                         </Button>
                     </div>
@@ -113,4 +126,133 @@ QuestionWriteForm.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(QuestionWriteForm)
+const ReadForm = withStyles(styles)(QuestionWriteForm);
+
+
+
+const style = {
+    formStyle:{
+        marginLeft:20,
+        marginRight:20,
+        marginTop:70,
+        marginBottom:70,
+        background:'white',
+        padding:20,
+        boxShadow: 'rgba(140, 140, 140, 0.4) 0.8px 0.5px 0.6px',
+        border:'1px solid rgba(140,140,140, .4)',
+        maxWidth: 800,
+        width: '100%'
+    },
+    buttonWrapStyle: {
+        textAlign:'center',
+        marginTop:30,
+        marginBottom:30
+    },
+    button:{
+        height: 45,
+        width: 95,
+        marginRight: 50
+    },
+    questionWriteWrap:{
+        display: 'flex',
+        margin: 30,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+}
+class InitializeFromStateForm extends React.Component {
+
+    state = {
+        isModifyMode:false
+    }
+
+    setModifyMode = () => {
+        this.setState({
+            isModifyMode: !this.state.isModifyMode
+        })
+    }
+
+    submit = (values) => {
+        const {onSubmit} = this.props;
+        this.setModifyMode();
+        onSubmit(values);
+    }
+    render() {
+        const { handleSubmit, pristine, username, submitting,question,questionDelete} = this.props
+        return (
+            
+            this.state.isModifyMode ? (
+                <div style={style.questionWriteWrap}>
+                    <Typography style={{marginTop:50}} variant="h4" id="tableTitle">
+                        게시글수정
+                    </Typography>
+                    <div style={style.formStyle}>
+                        <form onSubmit={handleSubmit(this.submit)}>
+                            <div>
+                                <Field
+                                    name="username"
+                                    label={username}
+                                    component={baseFields.renderListItem}
+                                />
+                            </div>
+                            <div>
+                                <Field
+                                    name="title"
+                                    label="제목"
+                                    component={baseFields.renderTextField}
+                                />
+                            </div>
+                            <div>
+                                <Field 
+                                    name="content" 
+                                    component={baseFields.renderEditor}
+                                    label="Content"
+                                />
+                            </div>
+            
+                            <div style={style.buttonWrapStyle}>
+                                <Button 
+                                    variant="contained" 
+                                    color="primary" 
+                                    style={style.button}
+                                    type="submit" 
+                                    disabled={pristine || submitting}>
+                                    등록
+                                </Button>
+                                <Button 
+                                    variant="contained" 
+                                    color="secondary" 
+                                    onClick={this.setModifyMode}
+                                    style={style.button}
+                                    >
+                                    취소
+                                </Button>
+                            </div>
+                        </form>  
+                    </div> 
+                </div>):
+            <ReadForm
+                setModifyMode={this.setModifyMode}
+                question={question} 
+                username={username} 
+                questionDelete={questionDelete}/>
+        )   
+    }
+}
+
+InitializeFromStateForm = reduxForm({
+    form: 'initializeFromState',
+    enableReinitialize : true
+})(InitializeFromStateForm)
+
+
+InitializeFromStateForm = connect(
+    state => ({
+        initialValues: state.question.get('currentData')
+    }),
+    { load: getEndQuestion } 
+)(InitializeFromStateForm)
+
+export default InitializeFromStateForm
+

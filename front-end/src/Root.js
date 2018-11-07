@@ -7,6 +7,9 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { bindActionCreators } from 'redux';
 import * as authActions from 'store/reducers/auth';
 
+import QuestionReadContainer from 'containers/question/QuestionReadContainer';
+import QuestionWriteContainer from 'containers/question/QuestionWriteContainer';
+
 class Root extends React.Component {
 
     render(){
@@ -27,6 +30,7 @@ class Root extends React.Component {
         return (
             <BrowserRouter>
                 <MuiThemeProvider theme={theme}>
+                    {/* <QuestionReadContainer /> */}
                     <App isLogged={isLogged}/> 
                 </MuiThemeProvider>
             </BrowserRouter>

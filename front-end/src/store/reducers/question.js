@@ -16,9 +16,11 @@ export const deleteQuestionFailure  = createAction(ActionTypes.DELTE_QUESTION_FA
 const initialState = Map({
     data:List(),
     currentData:Map({}),
-    message:''
+    delete:Map({
+        data:Map({}),
+        msg:''
+    })
 });
-
 
 // reducer
 export default handleActions({
@@ -28,14 +30,16 @@ export default handleActions({
     },
     [ActionTypes.GET_END_QUESTION]: (state, action) => {
         const question = action.payload;
-        question.content += "test";
         return state.set('currentData', question)
     },
     [ActionTypes.DELTE_QUESTION_SUCCESS]: (state, action) => {
-        const message = action.payload;
-
+        const {msg, deletedData} = action.payload;
+        return state.setIn(['delete','data'],deletedData)
+                    .setIn(['delete','msg'], msg)
     },
     [ActionTypes.DELTE_QUESTION_FAILURE]: (state, action) => {
-        const message = action.payload;
+        const msg = action.payload;
+        return state.setIn(['delete','msg'],msg)
+                    
     },
 },initialState);

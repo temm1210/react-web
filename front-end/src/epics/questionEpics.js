@@ -1,5 +1,5 @@
-import { from } from 'rxjs';
-import { pluck, switchMap, tap, map, mergeMap,concat, startWith } from 'rxjs/operators';
+import { from,of } from 'rxjs';
+import { pluck, switchMap, tap, map, mergeMap,concat, startWith,catchError } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import * as api from 'services/api';
 import * as ActionTypes from 'store/actionTypes/';
@@ -58,11 +58,25 @@ export const writeQuestionEpic = (action$, store) => {
 }
 
 export const deleteQuestionEpic = (action$, store) => {
-    return action&
+    return action$
         .pipe(
-            ofType(ActionTypes.deleteQuestion),
-            pluch('payload')
-            map(id => from(api))
+            ofType(ActionTypes.DELTE_QUESTION),
+            pluck('payload'),
+            switchMap(id => from(api.deleteQuestion(id))
+                .pipe(
+                    pluck('data'),
+                    map(response => {
+                        const { status, msg, deletedData } = response;
+
+                        return status === 200 ?
+                            questionActions.deleteQuestionSuccess({deletedData,msg}) :
+                            questionActions.deleteQuestionFailure(msg) 
+                    }),
+                    startWith(loadingActions.loadingStart()),
+                    catchError(err => of(err)),
+                    concat([loadingActions.loadingEnd()])
+                )
+            )
         )
 }
 
