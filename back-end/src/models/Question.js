@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const Question = new Schema({
     _id:{
         type    : Number,
-        index   : true,
+        unique  : true,
         required: true
     },
     username:{
