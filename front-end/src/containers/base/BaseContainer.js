@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActions from 'store/reducers/auth';
 import { bindActionCreators } from 'redux';
-import Footer from 'components/common/Footer';
+
 import Base from 'components/common/Base';
 
 class BaseContainer extends Component {
@@ -18,11 +18,13 @@ class BaseContainer extends Component {
         const {children,isLogged} = this.props;
         const { handleLogout } = this;
 
-        return (     
-            <Base isLogged={isLogged} onLogout={handleLogout}>
-                {children}
-                <Footer />
-            </Base>
+        return (
+            <div>
+                <Base isLogged={isLogged} onLogout={handleLogout}>
+                    {children}
+                </Base>
+            </div>
+
         );
     }
 }

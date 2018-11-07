@@ -11,6 +11,10 @@ export const setQuestion            = createAction(ActionTypes.SET_QUESTION);
 export const deleteQuestion         = createAction(ActionTypes.DELTE_QUESTION);
 export const deleteQuestionSuccess  = createAction(ActionTypes.DELTE_QUESTION_SUCCESS);
 export const deleteQuestionFailure  = createAction(ActionTypes.DELTE_QUESTION_FAILURE);
+// export const questionPagination     = createAction(ActionTypes.QUESTION_PAGINATION)
+// export const setPage                = createAction(ActionTypes.SET_PAGE);
+// export const setRowPerPage          = createAction(ActionTypes.SET_ROW_PER_PAGE);
+export const setTotalCount          = createAction(ActionTypes.SET_TOTAL_COUNT);
 
 // 초기값
 const initialState = Map({
@@ -19,7 +23,13 @@ const initialState = Map({
     delete:Map({
         data:Map({}),
         msg:''
-    })
+    }),
+    totalCount:0
+    // paging:Map({
+    //     totalCount:0,
+    //     page:1,
+    //     rowPerPage:10
+    // })
 });
 
 // reducer
@@ -42,4 +52,16 @@ export default handleActions({
         return state.setIn(['delete','msg'],msg)
                     
     },
+    [ActionTypes.SET_TOTAL_COUNT]: (state, action) => {
+        return state.set('totalCount', action.payload)
+    }
+    // [ActionTypes.SET_PAGE]: (state, action) => {
+    //     return state.setIn(['paging','page'], action.payload);
+    // },
+    // [ActionTypes.SET_ROW_PER_PAGE]: (state, action) => {
+    //     return state.setIn(['paging','rowPerPage'], action.payload);
+    // },
+    // [ActionTypes.SET_TOTAL_COUNT]: (state, action) => {
+    //     return state.setIn(['paging','totalCount'], action.payload);
+    // }
 },initialState);

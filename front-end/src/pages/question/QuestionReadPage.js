@@ -10,7 +10,6 @@ export default ({match}) => {
     return (
         <BaseContainer>
            <QuestionReadContainer questionId={id} />
-           {/* <QuestionReadContainer/> */}
            <CommentListContainer/>
            <CommentWriteContainer/>
         </BaseContainer>

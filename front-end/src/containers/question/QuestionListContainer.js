@@ -16,15 +16,15 @@ const styles={
 
 class QuestionListContainer extends Component {
     componentDidMount = async () => {
-        const { QuestionActions } = this.props;
-        QuestionActions.getQuestionList();
+        // const { QuestionActions } = this.props;
+        // QuestionActions.getQuestionList();
     }
 
     render() {
         const {data , loading } = this.props;
-        if(loading) {
-            return <CircularProgress style={styles.progress} size={50} />
-        }
+        // if(loading) {
+        //     return <CircularProgress style={styles.progress} size={50} />
+        // }
         
         return (
             <QuestionList

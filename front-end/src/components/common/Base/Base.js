@@ -27,6 +27,8 @@ import {
     ChevronLeft as ChevronLeftIcon,
     Menu as MenuIcon
 } from '@material-ui/icons';
+import './Base.scss';
+import Footer from 'components/common/Footer';
 
 const drawerWidth = 240;
 
@@ -67,7 +69,7 @@ const styles = theme => ({
         alignItems: 'center',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-end'
     },
     content: {
         flexGrow: 1,
@@ -91,6 +93,9 @@ const styles = theme => ({
     },
     loginStyle: {
         marginRight:40
+    },
+    mainStyle: {
+        
     }
 });
 
@@ -205,6 +210,7 @@ class PersistentDrawerLeft extends React.Component {
                     <div className={classes.drawerHeader} />
                     {children}
                 </main>
+                <Footer/>
             </div>  
         );
     }

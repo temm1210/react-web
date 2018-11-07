@@ -23,18 +23,35 @@ export const getQuestionEpic = (action$, store) => {
 }
 
 export const questionListEpic = (action$ , store) => {
+    // return action$
+    //     .pipe(
+    //         ofType(ActionTypes.GET_QUESTION_LIST),
+    //         mergeMap(action => from(api.getQuestionList())
+    //             .pipe(       
+    //                 // tap(response => console.log('tap datas:',response)),
+    //                 map(response => questionActions.setQuestionList(response.data)),
+    //                 startWith(loadingActions.loadingStart()),           
+    //                 concat([loadingActions.loadingEnd()])
+    //             )
+    //         ),
+    //     );
     return action$
         .pipe(
             ofType(ActionTypes.GET_QUESTION_LIST),
-            // tap(action => console.log('tap action:',action)),
-            mergeMap(action => from(api.getQuestionList())
-                .pipe(       
-                    // tap(response => console.log('tap datas:',response)),
-                    map(response => questionActions.setQuestionList(response.data)),
+            pluck('payload'),
+            switchMap((page) => from(api.getQuestionList(page))
+                .pipe(
+                    pluck('data'),
+                    tap((data) => console.log('data:',data)),
+                    mergeMap(({questionList, totalCount}) => of(
+                        questionActions.setQuestionList(questionList),
+                        questionActions.setTotalCount(totalCount),
+                    )),
+                    // map(response => questionActions.setQuestionList(response.data)),
                     startWith(loadingActions.loadingStart()),           
                     concat([loadingActions.loadingEnd()])
                 )
-            ),
+            )
         );
 }
 
@@ -79,4 +96,5 @@ export const deleteQuestionEpic = (action$, store) => {
             )
         )
 }
+
 
