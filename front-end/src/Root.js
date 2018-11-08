@@ -1,12 +1,12 @@
 import React from 'react'
 import App from 'components/App';
 import { connect } from 'react-redux';
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, HashRouter} from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { bindActionCreators } from 'redux';
 import * as authActions from 'store/reducers/auth';
-// import Pagination from 'components/common/Pagination';
+import HomePage from 'pages/home/HomePage';
 
 class Root extends React.Component {
 
@@ -26,13 +26,14 @@ class Root extends React.Component {
             // store.dispatch({type:ActionTypes.LOGIN_SUCCESS, payload:username})
         }
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <MuiThemeProvider theme={theme}>
                     {/* <QuestionReadContainer /> */}
                     <App isLogged={isLogged}/> 
                     {/* <Pagination/> */}
+                    {/* <HomePage/> */}
                 </MuiThemeProvider>
-            </BrowserRouter>
+            </HashRouter>
         )
     }
 }

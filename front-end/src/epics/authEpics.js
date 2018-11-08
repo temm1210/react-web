@@ -1,6 +1,6 @@
 import { from, of } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { mergeMap,pluck, tap,map, startWith, concat, catchError, switchMap } from 'rxjs/operators';
+import { mergeMap,pluck, tap,map, startWith, concat, switchMap } from 'rxjs/operators';
 import * as api from 'services/api';
 import * as ActionTypes from 'store/actionTypes/';
 import * as loadingActions from 'store/reducers/loading';
@@ -16,12 +16,12 @@ export const loginEpic = (action$, store) => {
                     pluck('data'),
                     map(response => {
                         const { status, username, errorMsg } = response;
-                        return status === 200 && username ?
-                            authActions.loginSuccess(username) :
-                            authActions.loginFailure(errorMsg);
+                        return status === 200 && username ? 
+                            of(authActions.loginSuccess(username)) :
+                            of(authActions.loginFailure(errorMsg));
                     }),
                     startWith(loadingActions.loadingStart()),
-                    concat([loadingActions.loadingEnd()])
+                    concat([of(loadingActions.loadingEnd())])
                 )
             )
 

@@ -16,7 +16,14 @@
             margin-bottom: 30px;
         }
     }
-    
+
+    .paginationWrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
 
     .imageContainer {
         border-bottom: 1px solid rgba(0,0,0,.2);

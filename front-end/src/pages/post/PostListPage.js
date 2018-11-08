@@ -2,10 +2,10 @@ import React from 'react'
 import BaseContainer from 'containers/base/BaseContainer';
 import CardListContainer from 'containers/card/CardListContainer';
 
-export default () => {
+export default ({match}) => {
     return (
         <BaseContainer>
-            <CardListContainer />
+            <CardListContainer page={match.params.page} limit={10}/>
         </BaseContainer>
     )
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // question request
-export const getQuestionList = (page) => axios.get(`/question/?page=${page}`);
+export const getQuestionList = (page, limit) => axios.get(`/question/?page=${page}&limit=${limit}`);
 export const getQuestion     = (id) => axios.get(`/question/${id}`);
 export const writeQuestion   = ( question ) => axios.post('/question',question);
 export const deleteQuestion  = (id) => axios.delete(`/question/${id}`);

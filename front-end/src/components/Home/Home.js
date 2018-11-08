@@ -1,9 +1,8 @@
 import React from 'react'
-import './Home.scss';
 import Typography from '@material-ui/core/Typography';
+import './Home.scss';
 
 export default () => {
-
     return (
 		<div className="container">
 			<div className="videoWrap">

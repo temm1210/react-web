@@ -29,6 +29,7 @@ import {
 } from '@material-ui/icons';
 import './Base.scss';
 import Footer from 'components/common/Footer';
+import { withRouter } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -114,7 +115,7 @@ class PersistentDrawerLeft extends React.Component {
     };
 
     render() {
-        const { classes, theme,children,isLogged,onLogout } = this.props;
+        const { classes, theme,children,isLogged,onLogout,history } = this.props;
         const { open } = this.state;
 
         const username = 'STW'
@@ -127,7 +128,7 @@ class PersistentDrawerLeft extends React.Component {
             },
         )
         return (
-            <div>
+            <div className="baseContainer">
                 <MuiThemeProvider theme={customTheme}>
                     <CssBaseline />
                     <AppBar
@@ -190,12 +191,24 @@ class PersistentDrawerLeft extends React.Component {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem component={Link} to={'/questionlist'}>
+                        <ListItem 
+                            button 
+                            onClick={() => {
+                                this.handleDrawerClose();
+                                history.push(`/questionlist/1`)
+                            }} 
+                        >
                             <ListItemIcon><QuestionAnswerIcon /></ListItemIcon>
                             <ListItemText primary="Q&A" />
                         </ListItem>
 
-                        <ListItem component={Link} to={'/post'}>
+                        <ListItem 
+                            button
+                            onClick={() => {
+                                this.handleDrawerClose();
+                                history.push('/postlist/1')
+                            }}
+                        >
                             <ListItemIcon><DeveloperBoardIcon /></ListItemIcon>
                             <ListItemText primary="POST" />
                         </ListItem>
@@ -221,4 +234,4 @@ PersistentDrawerLeft.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawerLeft);
+export default withRouter(withStyles(styles, { withTheme: true })(PersistentDrawerLeft));

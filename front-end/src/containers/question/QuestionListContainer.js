@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as questionActions from 'store/reducers/question';
 import QuestionList from 'components/question/QuestionList';
+import { withRouter } from 'react-router-dom';
 
 const styles={
     progress: {
@@ -15,20 +16,35 @@ const styles={
 }
 
 class QuestionListContainer extends Component {
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if(prevProps.location !== this.props.location){
+            this.dipatchActionToGetList(this.props.page)
+        }
+    }
+    
     componentDidMount = async () => {
-        // const { QuestionActions } = this.props;
-        // QuestionActions.getQuestionList();
+        this.dipatchActionToGetList(this.props.page)
     }
 
+    dipatchActionToGetList = (page) => {
+        const { QuestionActions, limit } = this.props;
+        QuestionActions.getQuestionList({page,limit})        
+    }
+    
+
     render() {
-        const {data , loading } = this.props;
+        const {data,loading,totalCount,page,limit } = this.props;
         // if(loading) {
         //     return <CircularProgress style={styles.progress} size={50} />
         // }
         
         return (
             <QuestionList
+                limit={limit}
+                page={page}
                 questions={data}
+                totalCount={totalCount}
             />
         );
     }
@@ -37,10 +53,12 @@ class QuestionListContainer extends Component {
 export default connect(
     (state) => ({
         data        : state.question.get('data'),
-        loading     : state.loading.get('loading')
+        totalCount: state.question.getIn( ['paging','totalCount'] ),
+        loading     : state.loading.get('loading'),
+        // page        : state.question.get(['paging','page'])
     }),
     (dispatch) => ({
         QuestionActions: bindActionCreators(questionActions, dispatch)
     })
-)(QuestionListContainer);
+)(withRouter(QuestionListContainer));
 

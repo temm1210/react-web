@@ -23,23 +23,11 @@ export const getQuestionEpic = (action$, store) => {
 }
 
 export const questionListEpic = (action$ , store) => {
-    // return action$
-    //     .pipe(
-    //         ofType(ActionTypes.GET_QUESTION_LIST),
-    //         mergeMap(action => from(api.getQuestionList())
-    //             .pipe(       
-    //                 // tap(response => console.log('tap datas:',response)),
-    //                 map(response => questionActions.setQuestionList(response.data)),
-    //                 startWith(loadingActions.loadingStart()),           
-    //                 concat([loadingActions.loadingEnd()])
-    //             )
-    //         ),
-    //     );
     return action$
         .pipe(
             ofType(ActionTypes.GET_QUESTION_LIST),
             pluck('payload'),
-            switchMap((page) => from(api.getQuestionList(page))
+            switchMap(({page,limit}) => from(api.getQuestionList(page,limit))
                 .pipe(
                     pluck('data'),
                     tap((data) => console.log('data:',data)),

@@ -10,49 +10,80 @@ import {
     PostListPage
 } from 'pages';
 
-export default ( props ) => {
-    const { isLogged } = props;
 
-    return (
-        <div>
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/questionlist" component={QuestionListPage} />
-                <Route exact path="/questionget/:id" component={QuestionReadPage} />
-                {/* <Route exact path="/questionwrite" component={QuestionWritePage} /> */}
-                <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
-                <Route path="/login" component={LoginPage} />
-                <Route path="/join" component={JoinPage} />
-                <Route Path="/post" component={PostListPage} />
-            </Switch>                                                   
-        </div>
-    )
-}
+export default class App extends React.Component {
 
-function PrivateRoute({ component: Component, isLogged, ...rest }) {
-
-  let routeElement;
-
-  if(isLogged) {
-    routeElement =
-      <Route 
-        {...rest} 
-        render= {() =>(
-          <Component />
-        )} 
-      />
-  } else {
-    routeElement = window.confirm("로그인이 필요한 서비스입니다. 로그인하시겠습니까?") ?
-        (
-          <Route 
-            {...rest} 
-            render= {() =>(
-              <Redirect to={{pathname: "/login"}}/>
-            )} 
-          />
-        ) :
-        null
+  state ={
+    prevPath:''
+  }
+  
+  componentDidUpdate = (prevProps, prevState) => {
+    if(prevProps.location !== this.props.location){
+      console.log('prevProps.location:',prevProps.location)
+      console.log('this.props.location:',this.props.location)
+      return { prevPath: this.props.location }
+    }
   }
 
-  return routeElement;
+  render() {
+    const { isLogged } = this.props;
+
+    return (
+      <div>
+        <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/questionlist/:page" component={QuestionListPage} />
+            <Route exact path="/questionget/:id" component={QuestionReadPage} />
+            <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
+            <Route path="/login" component={LoginPage} />
+            <Route path="/join" component={JoinPage} />
+            <Route exact Path="/postlist/:page" component={PostListPage} />
+        </Switch>                                                   
+    </div>     
+    )
+  }
+}
+
+// export default withRouter(( props ) => {
+//     const { isLogged } = props;
+
+//     return (
+//         <div>
+//             <Switch>
+//                 <Route exact path="/" component={HomePage} />
+//                 <Route exact path="/questionlist/:page" component={QuestionListPage} />
+//                 <Route exact path="/questionget/:id" component={QuestionReadPage} />
+//                 <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
+//                 <Route path="/login" component={LoginPage} />
+//                 <Route path="/join" component={JoinPage} />
+//                 <Route exact Path="/postlist/:page" component={PostListPage} />
+//             </Switch>                                                   
+//         </div>
+//     )
+// })
+
+
+const PrivateRoute = ({ component: Component,prevPath, isLogged, ...rest }) => {
+  if(isLogged) {
+    return(
+        <Route 
+          {...rest} 
+          render= {() =>(
+            <Component />
+          )} 
+        />
+      )
+  } else {
+        return (
+          <Route 
+            {...rest} 
+            render= {(props) =>(
+              <Redirect to={{
+                pathname: "/login",
+                state: { from: props.location}
+              }}/>
+            )} 
+          />
+        )
+      } 
 }

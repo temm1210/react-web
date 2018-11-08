@@ -1,13 +1,11 @@
 import React from 'react';
 import QuestionListContainer from 'containers/question/QuestionListContainer';
 import BaseContainer from 'containers/base/BaseContainer';
-import QuestionPaginingContainer from 'containers/question/QuestionPaginingContainer';
 
-export default () => {
+export default ({match}) => {
     return (      
         <BaseContainer>            
-            <QuestionListContainer/>
-            <QuestionPaginingContainer/>
+            <QuestionListContainer page={match.params.page} limit={10}/>
         </BaseContainer>        
     )
 }

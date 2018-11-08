@@ -7,10 +7,7 @@ export const SET_QUESTION               = "question/SET_QUESTION";
 export const DELTE_QUESTION             = "question/DELTE_QUESTION";
 export const DELTE_QUESTION_SUCCESS     = "question/DELTE_QUESTION_SUCCESS";
 export const DELTE_QUESTION_FAILURE     = "question/DELTE_QUESTION_FAILURE";
-// export const SET_PAGE                   = "question/SET_PAGE";
-// export const SET_ROW_PER_PAGE           = "question/SET_ROW_PER_PAGE";
 export const SET_TOTAL_COUNT            = "question/SET_TOTAL_COUNT";
-// export const QUESTION_PAGINATION        = "question/QUESTION_PAGINATION";
 
 //loading ActionTypes
 export const LOADING_START      = "loading/LOADING_START";

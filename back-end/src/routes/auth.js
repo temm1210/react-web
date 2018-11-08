@@ -7,8 +7,6 @@ const config = require('config/index');
 
 router.post('/join',async ( req, res) => {
     const user = req.body;
-    console.log('user:',user);
-
     try {
         const member = await Member.create(user);
         if(member) res.json({status:200, msg:'성공'})
