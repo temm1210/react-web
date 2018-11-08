@@ -384,9 +384,16 @@ module.exports = {
             loader: getStyleLoaders(
               {
                 importLoaders: 2,
+                includePaths:[paths.globalScss],
                 sourceMap: shouldUseSourceMap,
               },
-              'sass-loader'
+              {
+                loader:require.resolve('sass-loader'),
+                options:{
+                  sourceMap: shouldUseSourceMap,
+                  includePaths:[paths.globalScss]
+                }
+              }
             ),
             // Don't consider CSS imports dead code even if the
             // containing package claims to have no side effects.
@@ -402,10 +409,17 @@ module.exports = {
               {
                 importLoaders: 2,
                 sourceMap: shouldUseSourceMap,
+                includePaths:[paths.globalScss],
                 modules: true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
-              'sass-loader'
+              {
+                loader:require.resolve('sass-loader'),
+                options:{
+                  sourceMap: shouldUseSourceMap,
+                  includePaths:[paths.globalScss]
+                }
+              }
             ),
           },
           // "file" loader makes sure assets end up in the `build` folder.
