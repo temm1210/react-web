@@ -6,61 +6,60 @@ import {
     JoinPage,
     QuestionListPage,
     QuestionReadPage,
-    QuestionWritePage,
-    PostListPage
+    QuestionWritePage
 } from 'pages';
 
 
-export default class App extends React.Component {
+// export default class App extends React.Component {
 
-  state ={
-    prevPath:''
-  }
+//   state ={
+//     prevPath:''
+//   }
   
-  componentDidUpdate = (prevProps, prevState) => {
-    if(prevProps.location !== this.props.location){
-      console.log('prevProps.location:',prevProps.location)
-      console.log('this.props.location:',this.props.location)
-      return { prevPath: this.props.location }
-    }
-  }
+//   componentDidUpdate = (prevProps, prevState) => {
+//     if(prevProps.location !== this.props.location){
+//       console.log('prevProps.location:',prevProps.location)
+//       console.log('this.props.location:',this.props.location)
+//       return { prevPath: this.props.location }
+//     }
+//   }
 
-  render() {
-    const { isLogged } = this.props;
-
-    return (
-      <div>
-        <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/questionlist/:page" component={QuestionListPage} />
-            <Route exact path="/questionget/:id" component={QuestionReadPage} />
-            <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
-            <Route path="/login" component={LoginPage} />
-            <Route path="/join" component={JoinPage} />
-            <Route exact Path="/postlist/:page" component={PostListPage} />
-        </Switch>                                                   
-    </div>     
-    )
-  }
-}
-
-// export default withRouter(( props ) => {
-//     const { isLogged } = props;
+//   render() {
+//     const { isLogged } = this.props;
 
 //     return (
-//         <div>
-//             <Switch>
-//                 <Route exact path="/" component={HomePage} />
-//                 <Route exact path="/questionlist/:page" component={QuestionListPage} />
-//                 <Route exact path="/questionget/:id" component={QuestionReadPage} />
-//                 <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
-//                 <Route path="/login" component={LoginPage} />
-//                 <Route path="/join" component={JoinPage} />
-//                 <Route exact Path="/postlist/:page" component={PostListPage} />
-//             </Switch>                                                   
-//         </div>
+//       <div>
+//         <Switch>
+//             <Route exact path="/" component={HomePage} />
+//             <Route exact path="/questionlist/:page" component={QuestionListPage} />
+//             <Route exact Path="/postlist/:page" component={PostListPage} />
+//             <Route exact path="/questionget/:id" component={QuestionReadPage} />
+//             <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
+//             <Route path="/login" component={LoginPage} />
+//             <Route path="/join" component={JoinPage} />
+            
+//         </Switch>                                                   
+//     </div>     
 //     )
-// })
+//   }
+// }
+
+export default ( props ) => {
+    const { isLogged } = props;
+
+    return (
+        <div>
+            <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route exact path="/questionlist/:page" component={QuestionListPage} />
+                <Route exact path="/questionget/:id" component={QuestionReadPage} />
+                <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
+                <Route path="/login" component={LoginPage} />
+                <Route path="/join" component={JoinPage} />
+            </Switch>                                                   
+        </div>
+    )
+}
 
 
 const PrivateRoute = ({ component: Component,prevPath, isLogged, ...rest }) => {
@@ -77,12 +76,14 @@ const PrivateRoute = ({ component: Component,prevPath, isLogged, ...rest }) => {
         return (
           <Route 
             {...rest} 
-            render= {(props) =>(
-              <Redirect to={{
-                pathname: "/login",
-                state: { from: props.location}
+            render= {(props) =>{
+              console.log('props.location:',props.location)
+              return (
+                <Redirect to={{
+                  pathname: "/login",
+                  state: { from: props.location}
               }}/>
-            )} 
+            )}} 
           />
         )
       } 

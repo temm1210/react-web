@@ -195,9 +195,10 @@ class PersistentDrawerLeft extends React.Component {
                             button 
                             onClick={() => {
                                 this.handleDrawerClose();
-                                history.push(`/questionlist/1`)
+                                history.push(`/questionlist/${1}`)
                             }} 
                         >
+                            
                             <ListItemIcon><QuestionAnswerIcon /></ListItemIcon>
                             <ListItemText primary="Q&A" />
                         </ListItem>
@@ -206,7 +207,7 @@ class PersistentDrawerLeft extends React.Component {
                             button
                             onClick={() => {
                                 this.handleDrawerClose();
-                                history.push('/postlist/1')
+                                history.push(`/postlist/${1}`)
                             }}
                         >
                             <ListItemIcon><DeveloperBoardIcon /></ListItemIcon>

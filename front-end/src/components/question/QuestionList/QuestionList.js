@@ -3,12 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import moment from 'moment';
@@ -16,40 +10,92 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Pagination from "material-ui-flat-pagination";
 import { withRouter } from 'react-router-dom';
+import VisibilityIcon from '@material-ui/icons/Visibility'
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+// import testImage from 'assets/images/question_top.jpg';
+import Avatar from '@material-ui/core/Avatar';
+import CommentIcon from '@material-ui/icons/Comment';
 import './QuestionList.scss';
 
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+
+const theme = createMuiTheme();
 
 const styles = theme => ({
-  root: {
-    minWidth: '950px',
-    flex: 1,
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
+  cardContainer:{ 
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%'
   },
-  table: {
-    minWidth: 700,
+  cardWrap: {
+    // maxWidth: 300,
+    display: 'flex',
+    flexFlow:'column wrap',
+    width: '100%',
+    marginBottom:60,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
+  card: {
+    flexGrow:1,
+    flexShrink:1,
+    margin:10,
+    width: '100%',
+    marginBottom: 5,
+    maxWidth: '700px',
   },
-  tdStyle: {
-    textAlign:'center',
-    textDecoration:'none',
-    padding: 25
+  media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
+  },
+  textElipse: {
+    flex:1,
+    overflow: 'hidden',
+    fontSize:13,
+    textOverflow: 'ellipsis',
+    width: '600px',
+    whiteSpace: 'nowrap'
+  },
+  titleWrap: {
+    display: 'flex',
+    borderBottom: '1px solid rgba(0,0,0,.2)',
+    marginBottom: '20px',
+    paddingBottom: '20px',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'row'
+  },
+
+  username: {
+    fontSize: 14,
+    paddingLeft: 10
+  },
+  date: {
+    marginLeft: 'auto',
+    width: '150px',
+    textAlign: 'right',
+    paddingRight: 15,
+    paddingTop: 22,
+    minWidth: 150,
+    opacity: '.5'
+  },
+  iconSize: {
+    fontSize:20
+  },
+  cardActions: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexDirection: 'row'
+  },
+  infoWrap:{
+    marginTop: 20,
+    marginLeft: 12,
+    wordBreak: 'break-all'
   }
 });
-const theme = createMuiTheme();
 
 class QuestionList extends React.Component {
 
@@ -63,21 +109,18 @@ class QuestionList extends React.Component {
     this.setState({
       offset
     })
-    console.log('offset:',offset);
     history.push(`/questionlist/${page}`)
   }
 
   render() {
     const { classes,questions,totalCount,page,limit } = this.props;
 
-    console.log('page:',page)
     return (
       <div className="questionList">
         <CssBaseline/>
         <div className="imageContainer">
           <div className="imageWrap">
-            {/* <img className="imageWidth" alt="question1" src={require('../../../assets/images/question2.png')}/>
-            <img className="imageWidth" alt="question2" src={require('../../../assets/images/question.png')}/> */}
+            <div className="headerImage"></div>
           </div>
           <div className="imageCaption">
             <Typography style={{textAlign:'center'}} variant="h5" id="tableTitle">
@@ -85,80 +128,88 @@ class QuestionList extends React.Component {
             </Typography>
           </div>
         </div>
-        <div className="tableWrap">
-          <div className="listWrap">
-            <Button component={Link} to={'/questionwrite'} variant="contained" color="primary">새글쓰기</Button>
+
+        <div className={classes.cardContainer}>
+          <div className={classes.cardWrap}>
+            {
+              questions.map((question, index) => (        
+                <Card className={classes.card} key={index}>
+                  <Link to={`/questionget/${question._id}`}>  
+                    <CardActionArea> 
+                    {/* <CardActionArea> */}
+                        {/* <CardMedia
+                            component="img"
+                            alt="Contemplative Reptile"
+                            className={classes.media}
+                            height="140"
+                            image={testImage}
+                            title="Contemplative Reptile"
+                        /> */}
+                      <CardContent>
+                          <div className={classes.titleWrap}>
+                              <Avatar
+                                  alt="Adelle Charles"
+                                  src="/images/24.png"
+                                  style={{width:70, height:70, marginTop:10}}
+                              />
+                              <div className={classes.infoWrap}>
+                                  <strong style={{fontWeight: 700, fontSize:27}}>{question.title}</strong>                                 
+                                  <small className={classes.username}>({question.username})</small>
+                              </div>
+
+                              <Typography component="span" className={classes.date}>
+                              {
+                                  (function(){
+                                      let now = moment();
+                                      let dataDate = moment(question.writeDate);
+                                      let diff = now.diff(dataDate)
+                                      return diff > 80000000 ? moment(dataDate).format("YYYY-DD-MM HH:mm") : 
+                                                      moment(question.writeDate).fromNow()
+                                  })()
+                              }
+                              </Typography>
+                          </div>
+                          <Typography component="p" className={classes.textElipse}>
+                              {question.content}
+                          </Typography>
+                      </CardContent>
+
+                      <CardActions className={classes.cardActions}>
+                        <Button size="small" color="primary" disabled>
+                            <VisibilityIcon className={classes.iconSize}/>
+                            {question.views}
+                        </Button>
+                        <Button size="small" color="primary" disabled>
+                            <CommentIcon className={classes.iconSize}/>
+                        </Button>
+                      </CardActions>
+                    </CardActionArea>
+                  </Link>
+                </Card>
+                ))
+              }
+              <div className="paginationWrap">
+                  <MuiThemeProvider theme={theme}>
+                  <CssBaseline />
+                  <Pagination
+                      size="large"
+                      limit={limit}
+                      offset={this.state.offset}
+                      total={totalCount}
+                      onClick={(e, offset) => this.handlePage(offset)}
+                  />
+                  </MuiThemeProvider>
+              </div>
+            </div>
           </div>
-          <Paper className={classes.root}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell numeric className={classes.tdStyle}>번호</CustomTableCell>
-                  <CustomTableCell className={classes.tdStyle}>제목</CustomTableCell>
-                  <CustomTableCell className={classes.tdStyle}>아이디</CustomTableCell>
-                  <CustomTableCell className={classes.tdStyle}>등록날짜</CustomTableCell>
-                  <CustomTableCell numeric className={classes.tdStyle}>조회수</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {
-                  questions.map(question => {
-                    return (
-                      
-                      <TableRow key={question.id}>
-                        <CustomTableCell numeric className={classes.tdStyle} component="th" scope="row">
-                          {question._id}
-                        </CustomTableCell>
-                        <CustomTableCell component={Link} to={`/questionget/${question._id}`} className={classes.tdStyle}>{question.title}</CustomTableCell>
-                        <CustomTableCell className={classes.tdStyle}>{question.username}</CustomTableCell>
-                        <CustomTableCell numeric className={classes.tdStyle}>
-                        {
-                          (function(){
-                            let now = moment();
-                            let dataDate = moment(question.writeDate);
-                            let diff = now.diff(dataDate)
-                            return diff > 80000000 ? moment(dataDate).format("YYYY-DD-MM HH:mm") : 
-                                              moment(question.writeDate).fromNow()
-                          })()
-                        }
-                        </CustomTableCell>
-                        <CustomTableCell numeric className={classes.tdStyle}>{question.views}</CustomTableCell>
-                      </TableRow>
-                    );
-                  })
-                }
-              </TableBody>
-            </Table>
-          </Paper>
         </div>
-        <div className="paginationWrap">
-          <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            <Pagination
-                size="large"
-                limit={limit}
-                offset={this.state.offset}
-                total={totalCount}
-                onClick={(e, offset) => this.handlePage(offset)}
-            />
-          </MuiThemeProvider>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
+
 
 QuestionList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-function removeHtml(text) {
-  text = text.replace(/<br\/>/ig, "\n"); 
-  text = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
-  return text
-}
-
-
-
 
 export default withRouter(withStyles(styles)(QuestionList));

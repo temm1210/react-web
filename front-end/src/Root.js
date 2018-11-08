@@ -5,6 +5,7 @@ import { BrowserRouter, HashRouter} from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { bindActionCreators } from 'redux';
+import QuestionList from 'components/question/QuestionList';
 import * as authActions from 'store/reducers/auth';
 import HomePage from 'pages/home/HomePage';
 
@@ -30,6 +31,7 @@ class Root extends React.Component {
                 <MuiThemeProvider theme={theme}>
                     {/* <QuestionReadContainer /> */}
                     <App isLogged={isLogged}/> 
+                    {/* <QuestionList/> */}
                     {/* <Pagination/> */}
                     {/* <HomePage/> */}
                 </MuiThemeProvider>
@@ -46,5 +48,3 @@ export default connect(
         AuthActions: bindActionCreators(authActions, dispatch)
     })
 )(Root)
-
-

@@ -1,6 +1,8 @@
+@import 'globalStyles';
+
 .questionList{
     display: flex;
-    margin: 40px 20px 0 20px;
+    // margin: 40px 20px 0 20px;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -26,16 +28,31 @@
     }
 
     .imageContainer {
-        border-bottom: 1px solid rgba(0,0,0,.2);
-        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(0,0,0,.3);
+        margin-bottom: 80px;
         width: 100%;
+        position: relative;
         text-align: center;
 
-        .imageWidth {
-            min-width: 200px;
-            max-width: 300px;
-            min-height: 300px;
-            max-height: 350px;
+        .imageWrap {
+            background: rgba(10,17,12,.2);
+
+            .headerImage {
+                background: url(../../../assets/images/question_top.jpg);
+                position: relative;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center 88%;
+                height: 400px;
+                z-index: -99;
+                overflow: hidden;
+            }
+        }
+
+        .imageCaption {
+            position: absolute;
+            top: 40%;
+            left: 45%;
         }
     }
 }

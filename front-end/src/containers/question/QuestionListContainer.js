@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { connect } from 'react-redux';
 import * as questionActions from 'store/reducers/question';
 import QuestionList from 'components/question/QuestionList';
 import { withRouter } from 'react-router-dom';
-
-const styles={
-    progress: {
-        position: 'absolute',
-        top: '40%',
-        left: '60%',
-        textAlign: 'center'
-    }
-}
 
 class QuestionListContainer extends Component {
 
@@ -31,16 +21,12 @@ class QuestionListContainer extends Component {
         const { QuestionActions, limit } = this.props;
         QuestionActions.getQuestionList({page,limit})        
     }
-    
 
     render() {
         const {data,loading,totalCount,page,limit } = this.props;
-        // if(loading) {
-        //     return <CircularProgress style={styles.progress} size={50} />
-        // }
-        
+
         return (
-            <QuestionList
+            <QuestionList 
                 limit={limit}
                 page={page}
                 questions={data}
@@ -52,13 +38,11 @@ class QuestionListContainer extends Component {
 
 export default connect(
     (state) => ({
-        data        : state.question.get('data'),
+        data    : state.question.get('data'),
         totalCount: state.question.getIn( ['paging','totalCount'] ),
-        loading     : state.loading.get('loading'),
-        // page        : state.question.get(['paging','page'])
+        loading : state.loading.get('loading')
     }),
     (dispatch) => ({
         QuestionActions: bindActionCreators(questionActions, dispatch)
     })
 )(withRouter(QuestionListContainer));
-

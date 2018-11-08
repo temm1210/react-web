@@ -6,5 +6,3 @@ export const QuestionReadPage = asyncComponent(() => import('./question/Question
 export const QuestionWritePage = asyncComponent(() => import('./question/QuestionWritePage'));
 export const LoginPage = asyncComponent(() => import('./auth/LoginPage'));
 export const JoinPage = asyncComponent(() => import('./auth/JoinPage'));
-
-export const PostListPage = asyncComponent(() => import('./post/PostListPage'));
