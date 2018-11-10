@@ -19,12 +19,9 @@ class BaseContainer extends Component {
         const { handleLogout } = this;
 
         return (
-            <div>
-                <Base isLogged={isLogged} onLogout={handleLogout}>
-                    {children}
-                </Base>
-            </div>
-
+            <Base isLogged={isLogged} onLogout={handleLogout}>
+                {children}
+            </Base>
         );
     }
 }

@@ -6,26 +6,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    
-    .tableWrap {
-        width: 100%;
-        margin: 20px;
-        max-width: 900px;
-        .listWrap {
-            flex-direction: row;
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 30px;
-        }
-    }
-
-    .paginationWrap {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 40px;
-    }
 
     .imageContainer {
         border-bottom: 1px solid rgba(0,0,0,.3);
@@ -35,7 +15,7 @@
         text-align: center;
 
         .imageWrap {
-            background: rgba(10,17,12,.2);
+            background: rgba(4,5,3,.3);
 
             .headerImage {
                 background: url(../../../assets/images/question_top.jpg);
@@ -53,7 +33,99 @@
             position: absolute;
             top: 40%;
             left: 45%;
+
+            .imageText {
+                color: white;
+                font-size: 45px;
+                letter-spacing: 5px;
+                text-shadow: 0 1px 1px rgba(221,250,244, .5);
+              }
         }
+    }
+
+    .createBtn {
+        width: 100%;
+        max-width: 800px;
+        text-align: end;
+    }
+
+    .cardContainer { 
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .cardWrap {
+            display: flex;
+            flex-flow:column wrap;
+            width: 100%;
+            margin-bottom:60px;
+            align-items: center;
+            justify-content: center;
+
+            .card {
+                flex-grow:1;
+                flex-shrink:1;
+                margin:10px;
+                width: 100%;
+                margin-bottom: 25px;
+                max-width: 800px;
+
+                .titleWrap {
+                    display: flex;
+                    border-bottom: 1px solid rgba(0,0,0,.2);
+                    margin-bottom: 20px;
+                    padding-bottom: 20px;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-direction: row;
+
+                    .infoWrap{
+                        margin-top: 20px;
+                        margin-left: 12px;
+                        word-break: break-all;
+
+                        .username {
+                          font-size: 14px;
+                          padding-left: 10px;
+                        }
+                    }
+                    .date{
+                        margin-left: auto;
+                        width: 150px;
+                        text-align: right;
+                        padding-right: 15px;
+                        padding-top: 22px;
+                        min-width: 150px;
+                        opacity: .5;
+                    }
+                }
+                .textElipse {
+                    flex:1;
+                    overflow: hidden;
+                    font-size:13px;
+                    text-overflow: ellipsis;
+                    width: 600px;
+                    white-space: nowrap;
+                }
+                .cardActions {
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: row;
+
+                    .iconSize {
+                        font-size:20px
+                    }
+                }
+            }
+        }
+    }
+
+    .paginationWrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
     }
 }
 
