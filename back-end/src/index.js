@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const questionRouter = require('routes/questionRoute');
 const upload = require('routes/upload');
 const auth = require('routes/auth');
+// const morgan = require('morgan');
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/blog",{useNewUrlParser: true}).then(() => {

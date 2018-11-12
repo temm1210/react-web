@@ -3,6 +3,7 @@ import MenuLink from 'components/common/MenuLink';
 import { withStyles } from '@material-ui/core/styles';
 import {IconButton, Divider, Drawer} from '@material-ui/core';
 import {ChevronRight as ChevronRightIcon,ChevronLeft as ChevronLeftIcon } from '@material-ui/icons';
+import { QuestionAnswer as QuestionAnswerIcon } from '@material-ui/icons';
 
 const drawerWidth = 240;
 
@@ -39,7 +40,8 @@ const NavBar = ({classes, theme, open,handleDrawerClose}) => (
         </IconButton>
     </div>
     <Divider />          
-        <MenuLink path="questionlist" handleDrawerClose={handleDrawerClose}/>    
+        <MenuLink icon= {<QuestionAnswerIcon/>} path="questionlist" diplayText="Q&A" handleDrawerClose={handleDrawerClose}/>    
+        <MenuLink path="questionget" diplayText="POST" handleDrawerClose={handleDrawerClose}/>
     </Drawer>
 )
 

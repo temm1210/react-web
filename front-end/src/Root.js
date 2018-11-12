@@ -3,11 +3,12 @@ import App from 'components/App';
 import { connect } from 'react-redux';
 import { BrowserRouter, HashRouter} from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import Pagination from 'components/common/Pagination';
 import { bindActionCreators } from 'redux';
 import QuestionList from 'components/question/QuestionList';
 import * as authActions from 'store/reducers/auth';
 import HomePage from 'pages/home/HomePage';
+import QuestionListPage from 'pages/question/QuestionListPage';
 
 class Root extends React.Component {
 
@@ -29,10 +30,17 @@ class Root extends React.Component {
         return (
             <HashRouter>
                 <MuiThemeProvider theme={theme}>
+                    {/* <QuestionListPage/> */}
                     {/* <QuestionReadContainer /> */}
                     <App isLogged={isLogged}/> 
                     {/* <QuestionList/> */}
-                    {/* <Pagination/> */}
+                    {/* <div>
+                        <span>성능테스트1</span>
+                    </div>
+                    <div>
+                        <span>성능테스트2</span>
+                        <Pagination path="questionlist" limit={10}/>
+                    </div> */}
                     {/* <HomePage/> */}
                 </MuiThemeProvider>
             </HashRouter>
