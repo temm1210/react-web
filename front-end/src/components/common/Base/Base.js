@@ -4,32 +4,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import Navbar from 'components/common/Navbar';
+import {Button,IconButton,Typography,Toolbar,AppBar,CssBaseline} from '@material-ui/core';
 import {
-    Button,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-    IconButton,
-    Divider,
-    Typography,
-    List,
-    Toolbar,
-    AppBar,
-    CssBaseline,
-    Drawer
-} from '@material-ui/core';
-import {
-    QuestionAnswer as QuestionAnswerIcon,
     AccountCircle as AccountCircleIcon,
     PowerSettingsNew as PowerSettingsNewIcon,
-    DeveloperBoard as DeveloperBoardIcon,
-    ChevronRight as ChevronRightIcon,
-    ChevronLeft as ChevronLeftIcon,
     Menu as MenuIcon
 } from '@material-ui/icons';
 import './Base.scss';
 import Footer from 'components/common/Footer';
-import { withRouter } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -58,20 +42,6 @@ const styles = theme => ({
     hide: {
         display: 'none',
     },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end'
-    },
     content: {
         flexGrow: 1,
         padding: 0,
@@ -94,9 +64,6 @@ const styles = theme => ({
     },
     loginStyle: {
         marginRight:40
-    },
-    mainStyle: {
-        
     }
 });
 
@@ -115,7 +82,7 @@ class PersistentDrawerLeft extends React.Component {
     };
 
     render() {
-        const { classes, theme,children,isLogged,onLogout,history } = this.props;
+        const { classes,children,isLogged,onLogout} = this.props;
         const { open } = this.state;
 
         const username = 'STW'
@@ -175,46 +142,7 @@ class PersistentDrawerLeft extends React.Component {
                         }
                     </Toolbar>
                     </AppBar>
-                    <Drawer
-                        className={classes.drawer}
-                        variant="persistent"
-                        anchor="left"
-                        open={open}
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                    >
-                    <div className={classes.drawerHeader}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>
-                        <ListItem 
-                            button 
-                            onClick={() => {
-                                this.handleDrawerClose();
-                                history.push(`/questionlist/${1}`)
-                            }} 
-                        >
-                            
-                            <ListItemIcon><QuestionAnswerIcon /></ListItemIcon>
-                            <ListItemText primary="Q&A" />
-                        </ListItem>
-
-                        <ListItem 
-                            button
-                            onClick={() => {
-                                this.handleDrawerClose();
-                                history.push(`/postlist/${1}`)
-                            }}
-                        >
-                            <ListItemIcon><DeveloperBoardIcon /></ListItemIcon>
-                            <ListItemText primary="POST" />
-                        </ListItem>
-                    </List>
-                    </Drawer>
+                    <Navbar open={open} handleDrawerClose={this.handleDrawerClose}/>
                 </MuiThemeProvider>
                 <main
                 className={classNames(classes.content, {
@@ -235,4 +163,4 @@ PersistentDrawerLeft.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles, { withTheme: true })(PersistentDrawerLeft));
+export default withStyles(styles, { withTheme: true })(PersistentDrawerLeft);
