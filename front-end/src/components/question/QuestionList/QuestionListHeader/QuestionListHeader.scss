@@ -1,0 +1,35 @@
+.imageContainer {
+    border-bottom: 1px solid rgba(0,0,0,.3);
+    margin-bottom: 80px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+
+    .imageWrap {
+        background: rgba(4,5,3,.3);
+
+        .headerImage {
+            background: url(../../../../assets/images/question_top.jpg);
+            position: relative;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center 88%;
+            height: 400px;
+            z-index: -99;
+            overflow: hidden;
+        }
+    }
+
+    .imageCaption {
+        position: absolute;
+        top: 40%;
+        left: 45%;
+
+        .imageText {
+            color: white;
+            font-size: 45px;
+            letter-spacing: 5px;
+            text-shadow: 0 1px 1px rgba(221,250,244, .5);
+        }
+    }
+}
