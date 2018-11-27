@@ -7,7 +7,7 @@ export default () => {
 		<div className="container">
 			<div className="videoWrap">
 				<video autoPlay loop muted>
-					<source src={require('../../assets/videos/freevideo.mp4')} />
+					<source src={require('../../assets/videos/IndianTea.mp4')} />
 				</video>
 			</div>
 

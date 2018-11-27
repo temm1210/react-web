@@ -24,8 +24,8 @@ export default ({questions}) => (
     <div className="cardWrap">
         <div className="createBtn">
             <Tooltip title="질문하기">
-                <Button variant="fab" color="primary" aria-label="Add">
-                <AddIcon />
+                <Button component={Link} to="/questionwrite" variant="fab" color="primary" aria-label="Add">
+                    <AddIcon />
                 </Button>
             </Tooltip>
         </div>

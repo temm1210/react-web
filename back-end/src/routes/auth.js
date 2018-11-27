@@ -32,6 +32,7 @@ router.get('/checkuser/:username', async (req,res) => {
 
 router.post('/login', async (req,res) => {
     const { username, password } = req.body;
+    console.log('????:', req.body)
     try {
         const member = await Member.findOne({username:username})  
         if( member) {

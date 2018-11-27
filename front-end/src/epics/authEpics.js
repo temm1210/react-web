@@ -17,11 +17,11 @@ export const loginEpic = (action$, store) => {
                     map(response => {
                         const { status, username, errorMsg } = response;
                         return status === 200 && username ? 
-                            of(authActions.loginSuccess(username)) :
-                            of(authActions.loginFailure(errorMsg));
+                            authActions.loginSuccess(username) :
+                            authActions.loginFailure(errorMsg);
                     }),
                     startWith(loadingActions.loadingStart()),
-                    concat([of(loadingActions.loadingEnd())])
+                    concat([loadingActions.loadingEnd()])
                 )
             )
 

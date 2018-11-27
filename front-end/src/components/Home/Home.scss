@@ -10,7 +10,7 @@
     
         video {
             max-width: 100%;
-            min-width: 700px;
+            min-width: 100%;
             position: relative;
             top: -100px;
         }
@@ -18,7 +18,7 @@
 
     .videoCaptionWrap {
         position: absolute;
-        top: 25%;
+        top: 45%;
         left: 45%;
 
         .videoCaptionText {

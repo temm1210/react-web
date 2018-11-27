@@ -9,6 +9,7 @@ class LoginFormContainer extends Component {
 
     handleSubmit = async (values) => {
         const { AuthActions } = this.props;
+        console.log('values:',values)
         AuthActions.login(values);
     }
 
