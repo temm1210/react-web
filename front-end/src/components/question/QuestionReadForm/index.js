@@ -1,1 +1,1 @@
-export { default } from './questionReadForm';
+export { default } from './QuestionReadForm';

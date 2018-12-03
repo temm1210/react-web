@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuLink from 'components/common/MenuLink';
+import navbarImage from 'assets/images/navbar.jpg'
 import { withStyles } from '@material-ui/core/styles';
 import {IconButton, Divider, Drawer} from '@material-ui/core';
 import {ChevronRight as ChevronRightIcon,ChevronLeft as ChevronLeftIcon } from '@material-ui/icons';
@@ -10,7 +11,8 @@ const drawerWidth = 240;
 const styles = theme => ({
     drawer: {
         width: drawerWidth,
-        flexShrink: 0,
+        flexShrink: 0
+        
     },
     drawerHeader: {
         display: 'flex',
@@ -21,6 +23,20 @@ const styles = theme => ({
     },
     drawerPaper: {
         width: drawerWidth,
+    },
+    image: {
+        backgroundImage:`url(${navbarImage})`,
+        position: "fixed",
+        opacity:.3,
+        height:"100%",
+        width: "100%"
+    },
+    color: {
+        zIndex:-1,
+        background: 'black',
+        position: "fixed",
+        width: "100%",
+        height:"100%"
     }
 })
 
@@ -34,14 +50,16 @@ const NavBar = ({classes, theme, open,handleDrawerClose}) => (
             paper: classes.drawerPaper,
         }}
     >
+    <div className = {classes.image}></div>
+    <div className = {classes.color}/>
     <div className={classes.drawerHeader}>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton style={{color:'white'}} onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
     </div>
     <Divider />          
         <MenuLink icon= {<QuestionAnswerIcon/>} path="questionlist" diplayText="Q&A" handleDrawerClose={handleDrawerClose}/>    
-        <MenuLink path="questionget" diplayText="POST" handleDrawerClose={handleDrawerClose}/>
+        {/* <MenuLink path="questionget" diplayText="POST" handleDrawerClose={handleDrawerClose}/> */}
     </Drawer>
 )
 
