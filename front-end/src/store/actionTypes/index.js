@@ -18,9 +18,15 @@ export const JOIN               = "auth/JOIN";
 export const LOGIN              = "auth/LOGIN";
 export const LOGIN_SUCCESS      = "auth/LOGIN_SUCCESS";
 export const LOGIN_FAILURE      = "auth/LOGIN_FAILURE";
-
 export const LOGOUT             = "auth/LOGOUT";
 
-
 //card ActionTypes
-export const card               = "card/GET"
+export const CARD               = "card/GET";
+
+//comment ActionTypes
+export const SET_COMMENT        = "comment/SET_COMMENT";
+export const SET_COMMENT_SUCCESS= "comment/SET_COMMENT_SUCCESS";
+export const SET_COMMENT_FAILURE= "comment/SET_COMMENT_FAILURE";
+
+
+export const COMMENT_WRITE      = "comment/write";

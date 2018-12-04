@@ -8,7 +8,6 @@ const Question = require('models/Question');
 
 require('../passport/passportJwt')(passport);
 
-
 async function getTotalCount() {
     try {
         return await Question.count({})
@@ -61,7 +60,6 @@ router.post('/', async (req, res) => {
 router.get('/totalCount', async (req,res) => {
     try {
         const totalCount = await Question.count({})
-        console.log('totalCount:',totalCount);
         res.json(totalCount)
     } catch (error) {
         
@@ -86,8 +84,7 @@ router.get('/:id', async (req,res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
-
-    console.log('id:',id)
+    
     try {
         const deletedData = await Question.findOneAndDelete({_id:id});
         deletedData ? 

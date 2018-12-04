@@ -57,7 +57,7 @@ const NavBar = ({classes, theme, open,handleDrawerClose}) => (
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
     </div>
-    <Divider style={{background:"white"}}/>          
+    <Divider style={{background:"rgba(255,255,255,.4)", marginBottom:"15px"}}/>          
         <MenuLink icon= {<QuestionAnswerIcon/>} path="questionlist" diplayText="Q&A" handleDrawerClose={handleDrawerClose}/>    
         {/* <MenuLink path="questionget" diplayText="POST" handleDrawerClose={handleDrawerClose}/> */}
     </Drawer>

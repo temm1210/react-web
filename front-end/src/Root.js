@@ -28,7 +28,7 @@ class Root extends React.Component {
             // store.dispatch({type:ActionTypes.LOGIN_SUCCESS, payload:username})
         }
         return (
-            <HashRouter>
+            <HashRouter>        
                 <MuiThemeProvider theme={theme}>
                     {/* <QuestionListPage/> */}
                     {/* <QuestionReadContainer /> */}

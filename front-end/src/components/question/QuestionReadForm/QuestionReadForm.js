@@ -128,8 +128,6 @@ QuestionWriteForm.propTypes = {
 
 const ReadForm = withStyles(styles)(QuestionWriteForm);
 
-
-
 const style = {
     formStyle:{
         marginLeft:20,
@@ -179,7 +177,7 @@ class InitializeFromStateForm extends React.Component {
         onSubmit(values);
     }
     render() {
-        const { handleSubmit, pristine, username, submitting,question,questionDelete} = this.props
+        const { handleSubmit, pristine, username, submitting,initialValues,questionDelete} = this.props
         return (
             
             this.state.isModifyMode ? (
@@ -231,10 +229,11 @@ class InitializeFromStateForm extends React.Component {
                             </div>
                         </form>  
                     </div> 
-                </div>):
+                </div>
+            ):
             <ReadForm
                 setModifyMode={this.setModifyMode}
-                question={question} 
+                question={initialValues} 
                 username={username} 
                 questionDelete={questionDelete}/>
         )   
@@ -242,17 +241,17 @@ class InitializeFromStateForm extends React.Component {
 }
 
 InitializeFromStateForm = reduxForm({
-    form: 'initializeFromState',
+    form: 'QuestionReadForm',
     enableReinitialize : true
 })(InitializeFromStateForm)
 
 
-InitializeFromStateForm = connect(
-    state => ({
-        initialValues: state.question.get('currentData')
-    }),
-    { load: getEndQuestion } 
-)(InitializeFromStateForm)
+// InitializeFromStateForm = connect(
+//     state => ({
+//         initialValues: state.question.get('currentData')
+//     }),
+//     { load: getEndQuestion } 
+// )(InitializeFromStateForm)
 
 export default InitializeFromStateForm
 

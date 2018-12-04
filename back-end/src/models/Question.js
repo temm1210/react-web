@@ -30,7 +30,12 @@ const Question = new Schema({
     views: {
         type    : Number,
         default : 0
-    }
+    },
+    comments: [{
+        username: String,
+        text    : String,
+        date    : {type: Date, default: Date.now}       
+    }]
 })
 
 

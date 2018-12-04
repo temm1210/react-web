@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const questionRouter = require('routes/questionRoute');
 const upload = require('routes/upload');
 const auth = require('routes/auth');
+const comment = require('routes/comment');
 // const morgan = require('morgan');
 
 mongoose.Promise = global.Promise;
@@ -21,7 +22,8 @@ app.use('/images',express.static('images'))
 app.use(express.static(path.join(__dirname, '../../front-end/build')));
 app.use('/question', questionRouter);
 app.use('/upload', upload);
-app.use('/auth', auth)
+app.use('/auth', auth);
+app.use('/comment',comment);
 
 app.listen(5000, () => {
     console.log('5000 port listening')

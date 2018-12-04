@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import './CommentWrite.scss';
 
 class CommentWrite extends Component {
-
     state = {
         isFocus: false
     }
@@ -20,8 +19,6 @@ class CommentWrite extends Component {
         const { handleSubmit, onSubmit,username} = this.props
         const { isFocus } = this.state;
 
-        console.log('onSubmit:',onSubmit)
-
         return (
             <div className="formWrap">
                 <form className="formStyle" onSubmit={handleSubmit(onSubmit)}>
@@ -33,19 +30,18 @@ class CommentWrite extends Component {
                         />
                     </div>
                     <div>
-                    {
-                        isFocus ?
-                            <Field
-                                name="content"
-                                component={baseFields.renderEditor}
-                            />
-                        :
-                            <Field
-                                component={baseFields.renderTextField}
-                                onFocus={this.handleFocus}
-                            />
-                        
-                    }
+                        {
+                            isFocus ?
+                                <Field
+                                    name="content"
+                                    component={baseFields.renderEditor}
+                                />
+                            :
+                                <Field
+                                    component={baseFields.renderTextField}
+                                    onFocus={this.handleFocus}
+                                />   
+                        }
                     </div>
                     <div className="buttonWrapStyle">
                         <Button 
@@ -65,7 +61,7 @@ class CommentWrite extends Component {
                     </div>
                 </form>
             </div>
-        )
+        );
     }
 }
 

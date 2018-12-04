@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import * as questionActions from 'store/reducers/question';
 import { bindActionCreators } from 'redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { reduxForm } from 'redux-form'
 import * as api from 'services/api';
 
 const styles={
@@ -58,7 +59,7 @@ class QuestionRead extends Component {
     }
     
     render() {
-        const { loading,currentData,username } = this.props;
+        const { loading,initialValues,username } = this.props;
         
         if(loading) {
             return <CircularProgress style={styles.progress} size={50} />
@@ -69,17 +70,17 @@ class QuestionRead extends Component {
                 onSubmit={this.handleQuestionModify}
                 questionDelete={this.handleQuestionDelete}
                 username={username}
-                question={currentData}/>
+                initialValues={initialValues}/>
         );
     }
 }
 
 export default connect(
     (state) => ({
-        deletedData : state.question.getIn(['delete','data']),
-        currentData  : state.question.get('currentData'),
-        username    : state.auth.getIn(['login','username']),
-        loading     : state.loading.get('loading'),
+        deletedData  : state.question.getIn(['delete','data']),
+        username     : state.auth.getIn(['login','username']),
+        loading      : state.loading.get('loading'),
+        initialValues: state.question.get('currentData') // initialValues를 선언해야 store에 저장됨.
     }),
     (dispatch) => ({
         QuestionActions: bindActionCreators(questionActions, dispatch)
