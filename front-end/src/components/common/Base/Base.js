@@ -89,7 +89,7 @@ class PersistentDrawerLeft extends React.Component {
         const customTheme = createMuiTheme({ 
             palette: {
                 primary: {
-                        main: 'rgb(40,48,46)'
+                        main: 'rgb(0,0,0)'
                     }
                 }
             },
