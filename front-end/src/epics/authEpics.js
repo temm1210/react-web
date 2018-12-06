@@ -24,7 +24,6 @@ export const loginEpic = (action$, store) => {
                     concat([loadingActions.loadingEnd()])
                 )
             )
-
         )
 }
 

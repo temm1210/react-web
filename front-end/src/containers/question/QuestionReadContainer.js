@@ -3,9 +3,9 @@ import QuestionReadForm from 'components/question/QuestionReadForm';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as questionActions from 'store/reducers/question';
+import * as commentActions from 'store/reducers/comment';
 import { bindActionCreators } from 'redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { reduxForm } from 'redux-form'
 import * as api from 'services/api';
 
 const styles={
@@ -22,6 +22,18 @@ class QuestionRead extends Component {
         const { questionId,QuestionActions } = this.props;
         QuestionActions.getStartQuestion(questionId);
     }
+
+    handleCommentSubmit = values => {
+        const { username, CommentActions,questionId } = this.props;
+        const { content } = values;
+
+        if( content ){
+            values.username = username;
+            CommentActions.setComment({id:questionId, comment:values})
+        } else {
+            window.alert("댓글을 입력하세요")
+        }
+    }
     
     handleQuestionDelete = (id) => {
         if(window.confirm("삭제하시겠습니까?")){
@@ -31,31 +43,22 @@ class QuestionRead extends Component {
     }
 
     handleQuestionModify = async (question) => {
-        console.log('question:',question);
-        const { QuestionActions} = this.props;
         try {
             if(window.confirm("수정하시겠습니까?")){
-                const { data: {status} } = await api.modifyQuestion(question._id, question);
-                console.log('status:',status);
-
-                if(status === 200){
-                    QuestionActions.getEndQuestion(question)
-                    
-                }
+                await api.modifyQuestion(question._id, question);
             }          
         } catch (error) {
             throw Error("게시글 수정 에러발생")
         }
-
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        const { deletedData, history,currentData } = this.props;
+        const { deletedData, history,currentQuestionData } = this.props;
         if(prevProps.deletedData !== deletedData)
             history.push('/questionlist')
         
-        if(prevProps.currentData !== currentData)
-            history.push(`/questionget/${currentData._id}`)
+        if(prevProps.currentQuestionData !== currentQuestionData)
+            history.push(`/questionget/${currentQuestionData._id}`)
     }
     
     render() {
@@ -67,6 +70,7 @@ class QuestionRead extends Component {
 
         return (  
             <QuestionReadForm
+                handleCommentSubmit={this.handleCommentSubmit}
                 onSubmit={this.handleQuestionModify}
                 questionDelete={this.handleQuestionDelete}
                 username={username}
@@ -80,9 +84,10 @@ export default connect(
         deletedData  : state.question.getIn(['delete','data']),
         username     : state.auth.getIn(['login','username']),
         loading      : state.loading.get('loading'),
-        initialValues: state.question.get('currentData') // initialValues를 선언해야 store에 저장됨.
+        initialValues: state.question.get('currentQuestionData') // initialValues를 선언해야 store에 저장됨.
     }),
     (dispatch) => ({
-        QuestionActions: bindActionCreators(questionActions, dispatch)
+        QuestionActions: bindActionCreators(questionActions, dispatch),
+        CommentActions: bindActionCreators(commentActions, dispatch)
     })
 )(withRouter(QuestionRead));

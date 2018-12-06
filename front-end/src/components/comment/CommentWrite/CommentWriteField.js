@@ -1,13 +1,13 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField'
-import ClassicEditor from 'components/common/Editor';
+import CKEditor from 'components/common/Editor';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 
 export const renderEditor = ( {input} ) => {
     return (
-        <ClassicEditor
+        <CKEditor
             idNumber={2}
             data={input.value}
             onChange={data => input.onChange(data)}

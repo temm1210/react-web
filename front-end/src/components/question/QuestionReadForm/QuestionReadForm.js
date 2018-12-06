@@ -10,11 +10,11 @@ import CKEditor from 'components/common/Editor';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
-import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
-import {getEndQuestion} from 'store/reducers/question'
+import CommentWrite from 'components/comment/CommentWrite';
+import CommentList from 'components/comment/CommentList';
+import { Field, reduxForm } from 'redux-form';
 import * as baseFields from 'components/question/QuestionWriteForm/questionWriteFields';
-
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
     wrap: {
@@ -53,6 +53,8 @@ const styles = theme => ({
 const QuestionWriteForm = (props) => {
    
     const { classes, question,username,questionDelete,setModifyMode } = props;
+
+    console.log('initValues:',question)
     
     return (
         <div className={classes.wrap}>
@@ -83,6 +85,8 @@ const QuestionWriteForm = (props) => {
                         </div>
                     </ListItem>
                 
+                    <Divider variant="middle" />
+
                     <CKEditor
                         data={question.content}
                         config={{
@@ -171,15 +175,18 @@ class InitializeFromStateForm extends React.Component {
         })
     }
 
+    // componentDidMount = () => {
+    //     const { onLoad } = this.props;
+    // }
+
     submit = (values) => {
         const {onSubmit} = this.props;
         this.setModifyMode();
         onSubmit(values);
     }
     render() {
-        const { handleSubmit, pristine, username, submitting,initialValues,questionDelete} = this.props
+        const { handleSubmit, pristine, username, submitting,initialValues,questionDelete,handleCommentSubmit} = this.props
         return (
-            
             this.state.isModifyMode ? (
                 <div style={style.questionWriteWrap}>
                     <Typography style={{marginTop:50}} variant="h4" id="tableTitle">
@@ -231,11 +238,28 @@ class InitializeFromStateForm extends React.Component {
                     </div> 
                 </div>
             ):
-            <ReadForm
-                setModifyMode={this.setModifyMode}
-                question={initialValues} 
-                username={username} 
-                questionDelete={questionDelete}/>
+            (
+                <div>
+                    <ReadForm
+                        setModifyMode={this.setModifyMode}
+                        question={initialValues} 
+                        username={username} 
+                        questionDelete={questionDelete}/>
+
+                    <CommentList
+                        comments={initialValues.comments}
+                        username={username}
+                    />
+                    { username ?
+                        <CommentWrite 
+                            onSubmit={handleCommentSubmit}
+                            username={username}
+                        /> :
+                        <div style={{textAlign:'center', margin:'40px'}}>댓글은 로그인을 하셔야 합니다.</div>       
+                    }
+
+                </div>
+            )
         )   
     }
 }
@@ -248,7 +272,7 @@ InitializeFromStateForm = reduxForm({
 
 // InitializeFromStateForm = connect(
 //     state => ({
-//         initialValues: state.question.get('currentData')
+//         initialValues: state.question.get('currentQuestionData')
 //     }),
 //     { load: getEndQuestion } 
 // )(InitializeFromStateForm)

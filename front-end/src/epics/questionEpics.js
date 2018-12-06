@@ -11,8 +11,10 @@ export const getQuestionEpic = (action$, store) => {
         .pipe(
             ofType(ActionTypes.GET_START_QUESTION),
             pluck('payload'),
+            tap(data => console.log('getQuestion')),
             switchMap(questionId => from(api.getQuestion(questionId))
                 .pipe(
+                    tap(response => console.log('response:',response.data)),
                     mergeMap(response => [questionActions.getEndQuestion(response.data)]),
                     startWith(loadingActions.loadingStart()),           
                     concat([loadingActions.loadingEnd()])

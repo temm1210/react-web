@@ -29,10 +29,10 @@ class QuestionWriteContainer extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { history,currentData } = this.props;
+        const { history,currentQuestionData } = this.props;
 
-        if(prevProps.currentData !== currentData)
-            history.push(`/questionget/${currentData._id}`)
+        if(prevProps.currentQuestionData !== currentQuestionData)
+            history.push(`/questionget/${currentQuestionData._id}`)
     }
     
     handleGoBack = () => {
@@ -60,7 +60,7 @@ export default connect(
     (state) => ({
         username    : state.auth.getIn(['login','username']),
         loading     : state.loading.get('loading'),
-        currentData : state.question.get('currentData')
+        currentQuestionData : state.question.get('currentQuestionData')
     }),
     (dispatch) => ({
         QuestionActions: bindActionCreators(questionActions, dispatch)

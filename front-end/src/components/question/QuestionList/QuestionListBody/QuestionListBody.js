@@ -79,6 +79,7 @@ export default ({questions}) => (
                         </Button>
                         <Button size="small" color="primary" disabled>
                             <CommentIcon className="iconSize"/>
+                            {question.comments.length}
                         </Button>
                     </CardActions>
                     </CardActionArea>
