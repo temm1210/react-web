@@ -9,6 +9,7 @@ import QuestionList from 'components/question/QuestionList';
 import * as authActions from 'store/reducers/auth';
 import HomePage from 'pages/home/HomePage';
 import QuestionListPage from 'pages/question/QuestionListPage';
+import QuestionWritePage from 'pages/question/QuestionWritePage';
 
 class Root extends React.Component {
 
@@ -32,7 +33,8 @@ class Root extends React.Component {
                 <MuiThemeProvider theme={theme}>
                     {/* <QuestionListPage/> */}
                     {/* <QuestionReadContainer /> */}
-                    <App isLogged={isLogged}/> 
+                    <App isLogged={isLogged}/>
+                    {/* <QuestionWritePage/> */}
                     {/* <QuestionList/> */}
                     {/* <div>
                         <span>성능테스트1</span>

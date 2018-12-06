@@ -7,7 +7,6 @@ class CKEditor extends Component {
       element.on('change:data', () => {
         if (element.differ.getChanges().length > 0 ) {
           this.props.onChange(editor.getData());
-          console.log('editor.getData():',editor.getData())
         }
       });
     }
@@ -39,7 +38,7 @@ class CKEditor extends Component {
       const { data } = this.props;
 
       return (
-        <textarea id={`${this.setIdNumber()}`} name={`${this.setIdNumber()}`} defaultValue={data}>
+        <textarea id={`${this.setIdNumber()}`} className={`${this.setIdNumber()}`} name={`${this.setIdNumber()}`} defaultValue={data}>
         </textarea>
       )
     }

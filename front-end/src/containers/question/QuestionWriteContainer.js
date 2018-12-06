@@ -43,9 +43,9 @@ class QuestionWriteContainer extends Component {
     render() {
 
         const { loading,username } = this.props;
-        if(loading) {
-            return <CircularProgress style={styles.progress} size={50} />
-        }
+        // if(loading) {
+        //     return <CircularProgress style={styles.progress} size={50} />
+        // }
 
         return (
             <QuestionWriteForm

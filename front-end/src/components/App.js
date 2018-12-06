@@ -18,8 +18,8 @@ export default ( props ) => {
                 <Route exact path="/" component={HomePage} />
                 <Route exact path="/questionlist/:page" component={QuestionListPage} />
                 <Route exact path="/questionget/:id" component={QuestionReadPage} />
-                {/* <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/> */}
-                <Route exact path="questionwrite" component={QuestionWritePage} />
+                <PrivateRoute path="/questionwrite" isLogged={isLogged} component={QuestionWritePage}/>
+                {/* <Route exact path="questionwrite" component={QuestionWritePage} /> */}
                 <Route path="/login" component={LoginPage} />
                 <Route path="/join" component={JoinPage} />
             </Switch>                                                   

@@ -17,7 +17,8 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        background: '#eee',
     },
     typographyBackground:{
         padding: 10,
@@ -27,7 +28,6 @@ const styles = theme => ({
         background: '#eee',
         /* min-width: 800px; */
         width: '100%',
-        background: '#eee'
     },
     zeroPadding: {
         width: '100%',
