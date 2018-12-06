@@ -74,6 +74,8 @@ router.get('/:id', async (req,res) => {
             {_id:id},
             {$inc:{views:1}}
         )
+
+        console.log('question:',question)
         if(question) res.json(question)
         else res.json("해당하는 값이 없습니다")
     } catch (error) {
