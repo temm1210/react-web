@@ -46,6 +46,7 @@ router.post('/', async (req, res) => {
 
         //가장 최근에 저장했던 데이터 1개를가져온다음 _id에 +1해서 저장
         question._id = latestQuestion ? latestQuestion._id +1 : 1;
+        question.boardField = "Q&A";
         const newGuestion = await Question.create(question);
 
         if(question) res.json(newGuestion)
