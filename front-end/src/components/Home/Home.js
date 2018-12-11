@@ -24,7 +24,7 @@ export default () => {
 						<div className="question-link-image"></div>
 						<div className="question-link-text">
 							<div class="t2"></div>
-							<Typography style={{color:'white', fontSize:'26px',letterSpacing: '1px'}} variant="h3" >
+							<Typography id="questionBoard" style={{color:'white', fontSize:'26px',letterSpacing: '1px'}} variant="h3" >
 								Q&A 게시판					
 							</Typography>
 							<div class="t1"></div>

@@ -25,12 +25,14 @@ export default ({ onSubmit,errorMsg }) => {
     const buttonFields = [
         {
             type    : "submit",
+            id      : "loginSubmit",
             text    : "로그인",
             color   : "primary",
             variant : "contained"
         },
         {
             text        : "회원가입",
+            id          : "joinSubmit",
             color       : "secondary",
             variant     : "contained",
             component   : Link,

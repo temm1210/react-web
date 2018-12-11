@@ -37,8 +37,10 @@ class QuestionRead extends Component {
     
     handleQuestionDelete = (id) => {
         if(window.confirm("삭제하시겠습니까?")){
-            const { QuestionActions }= this.props;
+            const { QuestionActions,loading,history,initialValues }= this.props;
             QuestionActions.deleteQuestion(id);
+            if( !loading)
+                history.push('/questionlist/1')
         }
     }
 
@@ -53,12 +55,12 @@ class QuestionRead extends Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        const { deletedData, history,currentQuestionData } = this.props;
+        const { deletedData, history,initialValues } = this.props;
         if(prevProps.deletedData !== deletedData)
-            history.push('/questionlist')
+            history.push(`/questionlist/${initialValues._id}`)
         
-        if(prevProps.currentQuestionData !== currentQuestionData)
-            history.push(`/questionget/${currentQuestionData._id}`)
+        if(prevProps.initialValues !== initialValues)
+            history.push(`/questionget/${initialValues._id}`)
     }
     
     render() {

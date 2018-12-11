@@ -21,24 +21,24 @@ export default ( {onSubmit, onGoBack, username} ) => {
             label       : "제목",
             component   : baseFields.renderTextField
         },
-        {
-            name        : "boardField",
-            label       : "게시판 선택",
-            labelWidth  : 80,
-            component   : baseFields.renderSelectField,
-            childrens   : [
-                {
-                    component   : MenuItem,
-                    value       : "question",
-                    elementText : "Q&A"
-                },
-                {
-                    component   : MenuItem,
-                    value       : "post",
-                    elementText : "POST"
-                },
-            ]
-        },
+        // {
+        //     name        : "boardField",
+        //     label       : "게시판 선택",
+        //     labelWidth  : 80,
+        //     component   : baseFields.renderSelectField,
+        //     childrens   : [
+        //         {
+        //             component   : MenuItem,
+        //             value       : "question",
+        //             elementText : "Q&A"
+        //         },
+        //         {
+        //             component   : MenuItem,
+        //             value       : "post",
+        //             elementText : "POST"
+        //         },
+        //     ]
+        // },
         {
             name        : 'content',
             component   : baseFields.renderEditor,
@@ -50,12 +50,14 @@ export default ( {onSubmit, onGoBack, username} ) => {
     const buttonFields = [
         {
             type    : "submit",
+            id      : "questionSubmit",
             text    : "등록",
             color   : "primary",
             variant : "contained"
         },
         {
             text    : "취소",
+            id      : "questionCancel",
             color   : "secondary",
             variant : "contained",
             onClick : onGoBack

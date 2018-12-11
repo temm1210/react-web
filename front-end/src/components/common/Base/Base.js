@@ -113,7 +113,7 @@ class PersistentDrawerLeft extends React.Component {
                         >
                         <MenuIcon />
                         </IconButton>
-                        <Typography component={Link} style={{textDecoration:'none'}} to="/" button="true" variant="h6" color="inherit" noWrap className={classes.title}>
+                        <Typography id="title" component={Link} style={{textDecoration:'none'}} to="/" button="true" variant="h6" color="inherit" noWrap className={classes.title}>
                             MyWeb
                         </Typography>
                         {
@@ -122,13 +122,13 @@ class PersistentDrawerLeft extends React.Component {
                                     return (
                                         <div>
                                             <span>      
-                                                <Button color="inherit">
+                                                <Button color="inherit" id="userBtn">
                                                     <AccountCircleIcon className={classes.iconStyle}/>
                                                     {username}님
                                                 </Button>
                                             </span>
                                             <span>     
-                                                <Button onClick={onLogout} color="inherit">
+                                                <Button onClick={onLogout} id="logoutBtn" color="inherit">
                                                     <PowerSettingsNewIcon className={classes.iconStyle}/>
                                                     LOGOUT
                                                 </Button>
@@ -136,7 +136,7 @@ class PersistentDrawerLeft extends React.Component {
                                         </div>
                                     )
                                 } else {
-                                    return <div><Button component={Link} to={"/login"} color="inherit" className={classes.loginStyle}>Login</Button></div>
+                                    return <div><Button id="loginBtn" component={Link} to={"/login"} color="inherit" className={classes.loginStyle}>Login</Button></div>
                                 }
                             })()
                         }

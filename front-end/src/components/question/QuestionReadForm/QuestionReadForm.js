@@ -79,7 +79,7 @@ const QuestionWriteForm = (props) => {
                 
                     <ListItem>
                         <div style={{padding:15}}>
-                            <Typography className={classes.title} align="right" color="default" style={{fontSize:23}}>
+                            <Typography id="question_detail_title" className={classes.title} align="right" color="default" style={{fontSize:23}}>
                                 {question.title}
                             </Typography> 
                         </div>
@@ -104,6 +104,7 @@ const QuestionWriteForm = (props) => {
                     <div className={classes.buttonWrap}>
                         <Button
                             // onClick={() => questionModify(question._id)}
+                            id="question-submit-btn"
                             onClick={setModifyMode}
                             variant="contained" 
                             color="primary" 
@@ -112,6 +113,7 @@ const QuestionWriteForm = (props) => {
                         </Button>
 
                         <Button 
+                            id="question-delete-btn"
                             onClick={() =>questionDelete(question._id)} 
                             variant="contained" color="secondary" className={classes.button}>
                             삭제

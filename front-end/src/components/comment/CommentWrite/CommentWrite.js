@@ -44,7 +44,8 @@ class CommentWrite extends Component {
                         }
                     </div>
                     <div className="buttonWrapStyle">
-                        <Button 
+                        <Button
+                            id="comment-submit-btn"
                             variant="contained" 
                             color="primary" 
                             type="submit"
@@ -52,10 +53,11 @@ class CommentWrite extends Component {
                         >
                             등록
                         </Button>
-                        <Button 
+                        <Button
+                            id="comment-cancel-btn"
                             variant="contained"
-                             onClick={this.handleFocus} 
-                             color="secondary">
+                            onClick={this.handleFocus} 
+                            color="secondary">
                             취소
                         </Button>
                     </div>

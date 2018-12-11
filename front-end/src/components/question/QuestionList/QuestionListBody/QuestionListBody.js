@@ -61,7 +61,7 @@ export default ({questions}) => (
                                     let now = moment();
                                     let dataDate = moment(question.writeDate);
                                     let diff = now.diff(dataDate)
-                                    return diff > 80000000 ? moment(dataDate).format("YYYY-DD-MM HH:mm") : 
+                                    return diff > 80000000 ? moment(dataDate).format("YYYY-MM-DD HH:mm") : 
                                                     moment(question.writeDate).fromNow()
                                 })()
                             }
