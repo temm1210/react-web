@@ -14,7 +14,7 @@ const user = {
     password:"stw"
 }
 
-describe("Contact form", () => {
+describe("App test", () => {
     beforeAll(async () => {
         browser = await puppeteer.launch({
           headless: false,
