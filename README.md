@@ -1,6 +1,9 @@
 # react-web
 react 프로젝트
 
+## redux
+redux-observable
+
 ## puppeteer UI 테스트 
 
 ![](puppeteer.gif)
